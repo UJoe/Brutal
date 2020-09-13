@@ -1,0 +1,109 @@
+@font-face {
+    font-family: Oldenburg;
+    src: url(./fonts/Oldenburg-Regular.ttf);
+}
+
+body {
+    font-family: Oldenburg;
+    background: #1F1E4D;
+}
+
+p {
+    color:greenyellow;
+}
+
+h1 {text-align-last: center;
+    color: red;
+    filter: blur(1px);
+    filter: drop-shadow(0px 16px 20px rgb(219, 120, 219));
+    font-size: 300%;
+    margin-bottom: 60px;
+}
+
+span {
+    color: red;
+}
+
+.Order {
+    color: yellow;
+    font-style: oblique;
+    margin: 30px 5px;
+}
+
+.CharPic {
+    height: 220px;
+    border-radius: 10px;
+    margin: 25px;
+    opacity: 0.7;    
+}
+
+.CharPic:hover {
+    opacity: 1;
+    padding: 1px;
+    border: solid 3px green;
+    filter: brightness(1.1);
+    transform: rotate(360deg);
+    transition: all 1s;
+}
+
+#room-pic {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 70px;
+    border: outset 5px turquoise;
+    border-radius: 40px;
+    height: 300px;
+}
+
+#room-pic:hover {
+    filter: sepia(1);
+    transition: all 10s;
+}
+
+#counter {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 300%;
+    font-weight: bold;
+    color: purple;
+}
+
+#counter:hover {
+    transform: scale(1.8);
+    filter: hue-rotate(180deg);
+    transition: all 2s;
+}
+
+button {
+    transform: scale(1.7);
+    margin: 20px 40px;
+    color: orangered;
+    background-color: black;
+    border: solid 1px turquoise;
+    opacity: 1;
+    transition: all 0.5s;
+}
+
+button:hover {
+    transform: scale(2);
+    border: outset 5px turquoise;
+    color: red;
+    transition: all 0.3s;
+}
+
+button:active {
+    border: inset 4px lightseagreen;
+    color: orangered;
+}
+
+button:disabled {
+    color:darkslategray;
+    transform: scale(0.1);
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+button:
