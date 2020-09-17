@@ -137,7 +137,7 @@ function ActionBtn() {
                 console.log(y);
                 switch (y) {
                     case 0:
-                        alert("Kétszeresére dagadnak az imaid, nyersz " + x + " Erőt!")
+                        alert("Kétszeresére dagadnak az izmaid, nyersz " + x + " Erőt!")
                         break;
                     case 1:
                         alert("Úgy pattogsz, mint egy ninja, nyersz " + x + " Ügyességet!")
@@ -194,14 +194,14 @@ function NewRoom() {
     } else if (Steps % 10 == 0) {
         XRoom = parseInt(Steps / 10) - 1;
         EnemyVal = 60+XRoom*20;
-        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span><br>Ügyesség: <span class='charvalue' id='ugyes'></span><br>Ész: <span class='charvalue' id='esz'></span></p><p>Ellenfél támadóereje: <span id='enemy'></span></p><p class='Order'>Hogyan támadsz rá?</p><button id='EroAttack' onclick='EroBtn()'>Nyers erővel</button><button id='UgyAttack' onclick='UgyBtn()'>Taktikusan</button><button id='EszAttack' onclick='EszBtn()'>Furfanggal</button><button id='Flee' onclick='FleeBtn()'>Sehogy</button><div id='other'></div>";
+        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><p>Ellenfél támadóereje: <span id='enemy'></span></p><p class='Order'>Hogyan támadsz rá?</p><button id='EroAttack' onclick='EroBtn()'>Nyers erővel</button><button id='UgyAttack' onclick='UgyBtn()'>Taktikusan</button><button id='EszAttack' onclick='EszBtn()'>Furfanggal</button><button id='Flee' onclick='FleeBtn()'>Sehogy</button><div id='other'></div>";
         document.getElementById("counter").innerHTML = Steps;
         document.getElementById("room-pic").src = XRooms[XRoom][0];
         document.getElementById("room-desc").innerHTML = XRooms[XRoom][1];
         document.getElementById("enemy").innerHTML = EnemyVal;
     } else {
         Room = parseInt(Math.random() * Rooms.length);
-        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span><br>Ügyesség: <span class='charvalue' id='ugyes'></span><br>Ész: <span class='charvalue' id='esz'></span></p><button id='ActBtn' onclick='ActionBtn()'>Akció</button><button id='EscBtn' onclick='EscapeBtn()'>Tovább</button><div id='other'></div>";
+        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><button id='ActBtn' onclick='ActionBtn()'>Akció</button><button id='EscBtn' onclick='EscapeBtn()'>Tovább</button><div id='other'></div>";
         document.getElementById("counter").innerHTML = Steps;
         document.getElementById("room-pic").src = Rooms[Room][0];
         document.getElementById("room-desc").innerHTML = Rooms[Room][1];
@@ -212,9 +212,27 @@ function NewRoom() {
 }
 
 function PrintValues() {
-    document.getElementById('ero').innerHTML = Character[0];
-    document.getElementById('ugyes').innerHTML = Character[1];
-    document.getElementById('esz').innerHTML = Character[2];
+    var strength = document.getElementById('ero');
+    var skill = document.getElementById('ugyes');
+    var iq = document.getElementById('esz');
+    var nme = document.getElementById('enemy');
+    strength.innerHTML = Character[0]; 
+    strength.style.width=(10 + Character[0]*3)+"px";
+    if (Character[0]<20) {strength.style.backgroundColor="red"};
+    if (Character[0]>100) {strength.style.backgroundColor="white"};
+    skill.innerHTML = Character[1]; 
+    skill.style.width=(10 + Character[1]*3)+"px";
+    if (Character[1]<20) {skill.style.backgroundColor="red"};
+    if (Character[1]>100) {skill.style.backgroundColor="white"};
+    iq.innerHTML = Character[2]; 
+    iq.style.width=(10 + Character[2]*3)+"px";
+    if (Character[2]<20) {iq.style.backgroundColor="red"};
+    if (Character[2]>100) {iq.style.backgroundColor="white"};
+    if (EnemyVal>0) {
+        enemy.innerHTML = EnemyVal;
+        enemy.style.width=(10 + EnemyVal*3)+"px";
+        if (EnemyVal<20) {enemy.style.backgroundColor="black"};
+    }
 }
 
 function CheckEnd() {
@@ -230,7 +248,7 @@ function EroBtn() {
     if (x>y) {
         let z=parseInt((x-y)/2);
         EnemyVal -= z;
-        document.getElementById("enemy").innerHTML = EnemyVal;
+        PrintValues();
         alert("Agyba-főbe vered. Veszít "+z+" Támadóerőt.");
         CheckBBDeath();
     } else {
@@ -248,7 +266,7 @@ function UgyBtn() {
     if (x>y) {
         let z=parseInt((x-y)/2);
         EnemyVal -= z;
-        document.getElementById("enemy").innerHTML = EnemyVal;
+        PrintValues();
         alert("Sikerül kicselezned. Veszít "+z+" Támadóerőt.");
         CheckBBDeath();
     } else {
@@ -266,7 +284,7 @@ function EszBtn() {
     if (x>y) {
         let z=parseInt((x-y)/2);
         EnemyVal -= z;
-        document.getElementById("enemy").innerHTML = EnemyVal;
+        PrintValues();
         alert("Sikerült túljárnod az eszén! Veszít "+z+" Támadóerőt.");
         CheckBBDeath();
     } else {
@@ -285,6 +303,7 @@ function FleeBtn() {
     Character[2] -= parseInt(XRooms[XRoom][4] * (1 + Math.random() * EnemyVal / 10));
     alert("Menekülés közben az ellenfél egy iszonyatosat rádsóz! Vesztesz egy rakás pontot!");
     document.body.setAttribute("style", "filter: blur(20px) brightness(0)")
+    EnemyVal=0;
     NewRoom();
 }
 
