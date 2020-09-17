@@ -8,7 +8,7 @@ var Rooms = [
     ["./img/banya.jpg", "- Már megint hol jártál, Lajos, teeee?! - ordít rád egy maximum <span>20</span> támadóerejű, erősen rövidlátó vén banya és fenyegetően megindul feléd...", "attack", 20],
     ["./img/kut.jpg", "Ahogy sétálsz, egyszer csak egy kútba botlasz bele. Ha akarsz, igyál.", "drink", 3],
     ["./img/okosteszt.jpg", "Felkeresed régi tanárodat. Úgy tűnik, rá nem hatott Battle Beetle varázslata. Tanácsot kérsz tőle, mit tegyél. Jó sok dolgot elmond Neked, de vajon mennyit tudsz belőle felfogni?", "learn", 40],
-    ["./img/P-tunder.jpg", "Ahogy sétálgatsz, egyszercsak meglátsz egy lányt a folyópart mellett ülni. Különösen békés teremtésnek tűnik ebben a kaotikus világban. Leülsz mellé és megszólítód. Elmondja, hogy Cedric nevű törpehörcsöge beleesett a folyóba és faágon kapaszkodva úszik lefelé. Segítesz neki?", "help", 50],
+    ["./img/P-tunder.jpg", "Ahogy sétálgatsz, egyszercsak meglátsz egy lányt a folyópart mellett ülni. Különösen békés teremtésnek tűnik ebben a kaotikus világban. Leülsz mellé és megszólítód. Elmondja, hogy Cedric nevű törpehörcsöge beleesett a folyóba és egy faágba kapaszkodva úszik lefelé. Segítesz neki?", "help", 50],
     ["./img/sadowl.jpg", "Szívszorító hangokat hallasz egy fa koronája közül. Felpillantva meglátsz egy szomorú baglyot. Megpróbálsz neki vicceket mesélni, hátha jobb kedvre derül.", "help", 20],
     ["./img/potion.jpg", "Találsz egy bokorban egy varázsitalt. Megiszod?", "potion", 12],
     ["./img/dwarf.png", "Találkozol egy jóságos öreg törpével. Ha gondolod, kérdezd ki, hátha tud segíteni.", "learn", 15],
@@ -194,14 +194,14 @@ function NewRoom() {
     } else if (Steps % 10 == 0) {
         XRoom = parseInt(Steps / 10) - 1;
         EnemyVal = 60+XRoom*20;
-        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><p>Ellenfél támadóereje: <span id='enemy'></span></p><p class='Order'>Hogyan támadsz rá?</p><button id='EroAttack' onclick='EroBtn()'>Nyers erővel</button><button id='UgyAttack' onclick='UgyBtn()'>Taktikusan</button><button id='EszAttack' onclick='EszBtn()'>Furfanggal</button><button id='Flee' onclick='FleeBtn()'>Sehogy</button><div id='other'></div>";
+        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span><span class='changing' id='ero-ch'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span><span class='changing' id='ugyes-ch'></span></p><p>Ész: <span class='charvalue' id='esz'></span><span class='changing' id='esz-ch'></span></p><br><p>Ellenfél támadóereje: <span id='enemy'></span><span id='nme-ch'></span></p><p class='Order'>Hogyan támadsz rá?</p><button id='EroAttack' onclick='EroBtn()'>Nyers erővel</button><button id='UgyAttack' onclick='UgyBtn()'>Taktikusan</button><button id='EszAttack' onclick='EszBtn()'>Furfanggal</button><button id='Flee' onclick='FleeBtn()'>Sehogy</button><div id='other'></div>";
         document.getElementById("counter").innerHTML = Steps;
         document.getElementById("room-pic").src = XRooms[XRoom][0];
         document.getElementById("room-desc").innerHTML = XRooms[XRoom][1];
         document.getElementById("enemy").innerHTML = EnemyVal;
     } else {
         Room = parseInt(Math.random() * Rooms.length);
-        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><button id='ActBtn' onclick='ActionBtn()'>Akció</button><button id='EscBtn' onclick='EscapeBtn()'>Tovább</button><div id='other'></div>";
+        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span><span class='changing' id='ero-ch'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span><span class='changing' id='ugyes-ch'></span></p><p>Ész: <span class='charvalue' id='esz'></span><span class='changing' id='esz-ch'></span></p><br><button id='ActBtn' onclick='ActionBtn()'>Akció</button><button id='EscBtn' onclick='EscapeBtn()'>Tovább</button><div id='other'></div>";
         document.getElementById("counter").innerHTML = Steps;
         document.getElementById("room-pic").src = Rooms[Room][0];
         document.getElementById("room-desc").innerHTML = Rooms[Room][1];
