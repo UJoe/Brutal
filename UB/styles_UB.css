@@ -25,7 +25,7 @@ span {
 }
 
 .charvalue {
-   background-color: #00FF00;
+   background-color: lime;
    color: blue;
    display: inline-block;
    width: 0px;
@@ -76,7 +76,7 @@ span {
     margin-bottom: 70px;
     border: outset 5px turquoise;
     border-radius: 40px;
-    height: 300px;
+    height: 260px;
 }
 
 #room-pic:hover {
@@ -101,16 +101,17 @@ span {
 
 button {
     transform: scale(1.7);
-    margin: 20px 40px;
+    margin: 20px 30px 20px 50px;
     color: orangered;
     background-color: black;
     border: solid 1px turquoise;
     opacity: 1;
     transition: all 0.5s;
+    display: inline-block;
 }
 
 button:hover {
-    transform: scale(2);
+    transform: scale(1.9);
     border: outset 5px turquoise;
     color: red;
     transition: all 0.3s;
@@ -126,4 +127,8 @@ button:disabled {
     transform: scale(0.1);
     opacity: 0;
     transition: all 0.7s;
+}
+
+#other {
+    margin: 10px;
 }

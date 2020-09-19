@@ -14,7 +14,8 @@ var Rooms = [
     ["./img/dwarf.png", "Találkozol egy jóságos öreg törpével. Ha gondolod, kérdezd ki, hátha tud segíteni.", "learn", 15],
     ["./img/bear.jpg", "- Argh...szörcs...brumm! - üdvözöl egy <span>40</span> támadóerejű medve a száját nyalogatva. Valószínűleg meg kell vele küzdened...", "attack", 40],
     ["./img/orchard.jpg", "Ínycsiklandozó gyümölcsfák között vezet az utad. Ha akarsz, egyél!", "drink", 8],
-    ["./img/csontik.jpg", "Amikor befordulsz egy sarkon, hirtelen több harcos csontvázba botlasz bele. A támadóerejük kb. <span>70</span> lehet, úgyhogy légy óvatos!", "attack", 70],
+    ["./img/mug.jpg", "Leülsz az útpadkára, hogy megigyál egy bögre kakaót, amikor hirtelen a bögre megelevenedik a kezedben és torz vigyora mögül rekedt sziszegéssel közli, hogy ő a Bög-Rém!!! Nagyon azért nem ijedsz meg tőle - inkább csak bosszant, hogy már a kakaódat sem ihatod meg nyugodtan -, mivel kb. <span>10</span> támadóerejűnek néz ki.", "attack", 10],
+    ["./img/csontik.jpg", "Amikor befordulsz egy sarkon, hirtelen több harcos csontvázba botlasz bele. A támadóerejük kb. <span>60</span> lehet, úgyhogy légy óvatos!", "attack", 60],
     ["./img/vial.png", "Találsz a zsebedben egy ampullát. Rejtély, hogy hogy került oda, de ha gondolod, idd meg a tartalmát!", "potion", 5],
     ["./img/verem.jpg", "Jaj ne!!! Beleestél egy sötét verembe, ahol furcsa gázok terjengnek! Minden erődre szükség van, hogy kimássz.", "trap", 6],
     ["./img/spiderweb.jpg", "Nem figyelsz eléggé és belegabalyodsz egy hatalmas, mérgező pókhálóba! Megpróbálsz kijutni.", "trap", 3],
@@ -51,13 +52,16 @@ function ActionBtn() {
                 let y = parseInt(x / 12 + Math.random() * 5)
                 Character[0] -= y;
                 PrintValues();
-                alert("Jaj! Az ellenség eltalált! Vesztesz " + y + " Erőt.");
+                document.getElementById("other").innerHTML = "Jaj! Az ellenség eltalált! Vesztesz " + y + " Erőt.";
+                document.getElementById("other").style.color = "red";
                 CheckEnd();
             } else {
-                Character[1] += parseInt(x / 12);
-                alert("Lazán lecsapod! A sikeres testgyakorlásért kaptál " + parseInt(x / 12) + " Ügyességet és mész tovább.");
-                document.body.setAttribute("style", "filter: blur(20px) brightness(0)");
-                NewRoom();
+                Character[1] += 1 + parseInt(x / 12);
+                document.getElementById("other").innerHTML = "Lazán lecsapod! A sikeres testgyakorlásért kaptál " + (1 + parseInt(x / 12)) + " Ügyességet és mész tovább." + "<br><button onclick='next()'>Reszkessetek!</button>";
+                document.getElementById("other").style.color = "lightskyblue";
+                PrintValues();
+                document.getElementById("ActBtn").disabled = true;
+                document.getElementById("EscBtn").disabled = true;
             }
             break;
 
@@ -66,9 +70,11 @@ function ActionBtn() {
             var y = parseInt(x * 1.5 + Math.random() * x);
             Character[0] += y;
             Character[1] -= x;
-            alert("Jól megtömöd a pocakod. Nyertél " + y + " Erőt, de mivel lehúz a sok kaja, vesztesz " + x + " Ügyességet.");
-            document.body.setAttribute("style", "filter: blur(20px) brightness(0)");
-            NewRoom();
+            document.getElementById("other").innerHTML = "Jól megtömöd a pocakod. Nyertél " + y + " Erőt, de mivel lehúz a sok kaja, vesztesz " + x + " Ügyességet." + "<br><button onclick='next()'>Böff!</button>";
+            document.getElementById("other").style.color = "fuchsia";
+            PrintValues();
+            document.getElementById("ActBtn").disabled = true;
+            document.getElementById("EscBtn").disabled = true;
             break;
 
         case "madgym":
@@ -76,25 +82,28 @@ function ActionBtn() {
             Character[0] += x;
             Character[1] += Rooms[Room][3];
             Character[2] -= x;
-            alert("A gyúrás miatt ugyan kapsz " + x + " Erőt és " + Rooms[Room][3] + " Ügyességet, de az idióta társaság miatt vesztesz " + x + " Észt.");
-            document.body.setAttribute("style", "filter: blur(20px) brightness(0)");
-            NewRoom();
+            PrintValues();
+            document.getElementById("other").innerHTML = "A gyúrás miatt ugyan kapsz " + x + " Erőt és " + Rooms[Room][3] + " Ügyességet, de az idióta társaság miatt vesztesz " + x + " Észt.";
+            document.getElementById("other").style.color = "fuchsia";
+            document.getElementById("ActBtn").disabled = true;
             break;
 
         case "drink":
             var x = parseInt(1 + Math.random() * Rooms[Room][3]);
             Character[0] += x;
-            alert("Nyersz " + x + " Erőt és felfrissülten továbbgaloppozol.");
-            document.body.setAttribute("style", "filter: blur(20px) brightness(0)");
-            NewRoom();
+            PrintValues();
+            document.getElementById("other").innerHTML = "Nyersz " + x + " Erőt és felfrissülten továbbgaloppozol.";
+            document.getElementById("other").style.color = "lightskyblue";
+            document.getElementById("ActBtn").disabled = true;
             break;
 
         case "learn":
             var x = parseInt((Character[2] - Rooms[Room][3] + Math.random() * (Rooms[Room][3] + Character[2]) / 7) / 5);
             Character[2] += x;
-            alert("A tanulás eredményeképpen az Eszed " + x + " ponttal változott.");
-            document.body.setAttribute("style", "filter: blur(20px) brightness(0)");
-            NewRoom();
+            PrintValues();
+            document.getElementById("other").innerHTML = "A tanulás eredményeképpen az Eszed " + x + " ponttal változott.";
+            document.getElementById("other").style.color = "fuchsia";
+            document.getElementById("ActBtn").disabled = true;
             break;
 
         case "help":
@@ -102,13 +111,17 @@ function ActionBtn() {
             var y = parseInt(x / 2.5);
             if (Character[1] + Character[2] / 10 > Rooms[Room][3] + Math.random() * 10) {
                 for (let i = 0; i < 3; i++) { Character[i] += x };
-                alert("Sikeresen segítettél! Jutalomból minden értéked nőtt " + x + " ponttal!")
+                PrintValues();
+                document.getElementById("other").innerHTML = "Sikeresen segítettél! Jutalomból minden értéked nőtt " + x + " ponttal!" + "<br><button onclick='next()'>Szívesen, máskor is!</button>";
+                document.getElementById("other").style.color = "lightskyblue";
             } else {
                 for (let i = 0; i < 3; i++) { Character[i] -= y };
-                alert("Nem sikerült segítened, amiben teljesen összetörsz. Minden értéked csökken " + y + " ponttal!")
+                PrintValues();
+                document.getElementById("other").innerHTML = "Nem sikerült segítened, amiben teljesen összetörsz. Minden értéked csökken " + y + " ponttal!" + "<br><button onclick='next()'>Bocs!</button>";
+                document.getElementById("other").style.color = "red";
             };
-            document.body.setAttribute("style", "filter: blur(20px) brightness(0)");
-            NewRoom();
+            document.getElementById("ActBtn").disabled = true;
+            document.getElementById("EscBtn").disabled = true;
             break;
 
         case "potion":
@@ -119,39 +132,43 @@ function ActionBtn() {
                     y = 1;
                     if (Character[2] > Character[1]) { y = 2 }
                 } else if (Character[2] > Character[0]) { y = 2 };
+                Character[y] -= x;
+                PrintValues();
+                document.getElementById("other").style.color = "red";
+                document.getElementById("ActBtn").disabled = true;
                 switch (y) {
                     case 0:
-                        alert("Miután megidtad, elgyengülsz, vesztesz " + x + " Erőt!")
+                        document.getElementById("other").innerHTML = "Miután megidtad, elgyengülsz, vesztesz " + x + " Erőt!";
                         break;
                     case 1:
-                        alert("Erősen romlik a mozgáskoordinációd, vesztesz " + x + " Ügyességet!")
+                        document.getElementById("other").innerHTML = "Erősen romlik a mozgáskoordinációd, vesztesz " + x + " Ügyességet!";
                         break;
                     case 2:
-                        alert("Tompa köd száll az agyadra, vesztesz " + x + " Észt!")
+                        document.getElementById("other").innerHTML = "Tompa köd száll az agyadra, vesztesz " + x + " Észt!";
                         break;
                 }
-                Character[y] -= x;
             }
             else {
                 if (Character[1] < Character[0]) {
                     y = 1;
                     if (Character[2] < Character[1]) { y = 2 }
                 } else if (Character[2] < Character[0]) { y = 2 };
+                Character[y] += x;
+                PrintValues();
+                document.getElementById("other").style.color = "lightskyblue";
+                document.getElementById("ActBtn").disabled = true;
                 switch (y) {
                     case 0:
-                        alert("Kétszeresére dagadnak az izmaid, nyersz " + x + " Erőt!")
+                        document.getElementById("other").innerHTML = "Kétszeresére dagadnak az izmaid, nyersz " + x + " Erőt!";
                         break;
                     case 1:
-                        alert("Úgy pattogsz, mint egy ninja, nyersz " + x + " Ügyességet!")
+                        document.getElementById("other").innerHTML = "Úgy pattogsz, mint egy ninja, nyersz " + x + " Ügyességet!";
                         break;
                     case 2:
-                        alert("Kitisztul az elméd, nyersz " + x + " Észt!")
+                        document.getElementById("other").innerHTML = "Kitisztul az elméd, nyersz " + x + " Észt!";
                         break;
                 }
-                Character[y] += x;
             }
-            document.body.setAttribute("style", "filter: blur(20px) brightness(0)");
-            NewRoom();
             break;
 
         case "trap":
@@ -162,22 +179,22 @@ function ActionBtn() {
                 if (Character[2] > Character[1]) { y = 2 }
             } else if (Character[2] > Character[0]) { y = 2 };
             if ((Character[0] + Character[1] + Character[2] > x * 45) || Math.random() > x / 15) {
-                Character[y] -= parseInt(x/3); 
-                Character[0] -= parseInt(x/2);
-                if (Character[0]>0) {alert("Megsérülsz ugyan, de sikerül kijutnod! Ha akarsz, visszamászhatsz, de inkább menj tovább.")};
+                Character[y] -= parseInt(x / 3);
+                Character[0] -= parseInt(x / 2);
+                PrintValues();
+                if (Character[0] > 0) {
+                    document.getElementById("other").innerHTML = "Megsérülsz ugyan, de sikerül kijutnod! Ha akarsz, visszamászhatsz, de inkább menj tovább.";
+                    document.getElementById("other").style.color = "fuchsia";
+                };
                 document.getElementById("EscBtn").disabled = false;
             } else {
-                alert("Vesztettél " + x + " pontot legjobb képességedből, és nem sikerült kijutnod!");
                 Character[y] -= x;
+                PrintValues();
+                document.getElementById("other").innerHTML = "Vesztettél " + x + " pontot legjobb képességedből, és nem sikerült kijutnod!";
+                document.getElementById("other").style.color = "red";
                 document.getElementById("EscBtn").disabled = true;
             };
-            PrintValues();
             CheckEnd();
-            break;
-
-        default:
-            document.getElementById("ActBtn").disabled = true;
-            alert("Under construction!");
             break;
     }
 }
@@ -187,25 +204,35 @@ function EscapeBtn() {
         case "attack":
             let x = parseInt(Rooms[Room][3] / 7);
             Character[0] -= x;
-            alert("Menekülés közben az ellenség eltalál. Vesztesz " + x + " Erőt!");
+            PrintValues();
+            document.getElementById("other").innerHTML = "Menekülés közben az ellenség eltalál. Vesztesz " + x + " Erőt!" + "<br><button onclick='next()'>Hínye!</button>";
+            document.getElementById("other").style.color = "red";
+            document.getElementById("ActBtn").disabled = true;
+            document.getElementById("EscBtn").disabled = true;
             break;
 
         case "eat":
             Character[0] -= 1;
-            alert("Korgó gyomorral botorkálsz tovább. Vesztesz 1 Erőt.");
+            PrintValues();
+            document.getElementById("other").innerHTML = "Korgó gyomorral botorkálsz tovább. Vesztesz 1 Erőt." + "<br><button onclick='next()'>A böjt nemesít!</button>";
+            document.getElementById("other").style.color = "red";
+            document.getElementById("ActBtn").disabled = true;
+            document.getElementById("EscBtn").disabled = true;
             break;
 
         case "help":
             let y = parseInt(Rooms[Room][3] / 10);
             for (let i = 0; i < 3; i++) { Character[i] -= y };
-            alert("Mivel nem segítettél, elszégyelled magad. Minden értéked csökken " + y + " ponttal.");
+            PrintValues();
+            document.getElementById("other").innerHTML = "Mivel nem segítettél, elszégyelled magad. Minden értéked csökken " + y + " ponttal." + "<br><button onclick='next()'>Kellett volna?</button>";
+            document.getElementById("other").style.color = "red";
+            document.getElementById("ActBtn").disabled = true;
+            document.getElementById("EscBtn").disabled = true;
             break;
 
-        default: console.log("Under construction!");
+        default: next();
             break;
     }
-    document.body.setAttribute("style", "filter: blur(20px) brightness(0)")
-    NewRoom();
 }
 
 function NewRoom() {
@@ -217,7 +244,7 @@ function NewRoom() {
     } else if (Steps % 10 == 0) {
         XRoom = parseInt(Steps / 10) - 1;
         EnemyVal = 60 + XRoom * 20;
-        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span><span class='changing' id='ero-ch'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span><span class='changing' id='ugyes-ch'></span></p><p>Ész: <span class='charvalue' id='esz'></span><span class='changing' id='esz-ch'></span></p><br><p>Ellenfél támadóereje: <span id='enemy'></span><span id='nme-ch'></span></p><p class='Order'>Hogyan támadsz rá?</p><button id='EroAttack' onclick='EroBtn()'>Nyers erővel</button><button id='UgyAttack' onclick='UgyBtn()'>Taktikusan</button><button id='EszAttack' onclick='EszBtn()'>Furfanggal</button><button id='Flee' onclick='FleeBtn()'>Sehogy</button><div id='other'></div>";
+        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Minden támadásod után ő is megpróbál varázserejével visszatámadni!</p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><p>Ellenfél támadóereje: <span id='enemy'></span></p><p class='Order'>Hogyan támadsz rá?</p><button id='EroAttack' onclick='EroBtn()'>Nyers erővel</button><button id='UgyAttack' onclick='UgyBtn()'>Taktikusan</button><button id='EszAttack' onclick='EszBtn()'>Furfanggal</button><button id='Flee' onclick='FleeBtn()'>Sehogy</button><div id='other'></div>";
         document.getElementById("counter").innerHTML = Steps;
         document.getElementById("room-pic").src = XRooms[XRoom][0];
         document.getElementById("room-desc").innerHTML = XRooms[XRoom][1];
@@ -227,9 +254,9 @@ function NewRoom() {
         Room = parseInt(Math.random() * Rooms.length);
         if (Room == YRoom) {
             Room += 1;
-            if (Room == Rooms.length) {Room=0};
+            if (Room == Rooms.length) { Room = 0 };
         };
-        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span><span class='changing' id='ero-ch'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span><span class='changing' id='ugyes-ch'></span></p><p>Ész: <span class='charvalue' id='esz'></span><span class='changing' id='esz-ch'></span></p><br><button id='ActBtn' onclick='ActionBtn()'>Akció</button><button id='EscBtn' onclick='EscapeBtn()'>Tovább</button><div id='other'></div>";
+        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><button id='ActBtn' onclick='ActionBtn()'>Akció</button><button id='EscBtn' onclick='EscapeBtn()'>Tovább</button><div id='other'></div>";
         document.getElementById("counter").innerHTML = Steps;
         document.getElementById("room-pic").src = Rooms[Room][0];
         document.getElementById("room-desc").innerHTML = Rooms[Room][1];
@@ -245,23 +272,26 @@ function PrintValues() {
     var skill = document.getElementById('ugyes');
     var iq = document.getElementById('esz');
     var nme = document.getElementById('enemy');
-    strength.innerHTML = Character[0];
+    strength.innerHTML = (Character[0]>0) ? Character[0] : "X";
     strength.style.width = (10 + Character[0] * 3) + "px";
-    if (Character[0] < 20) { strength.style.backgroundColor = "red" };
-    if (Character[0] > 100) { strength.style.backgroundColor = "white" };
-    skill.innerHTML = Character[1];
+    if (Character[0] < 20) { strength.style.backgroundColor = "red" }
+    else if (Character[0] > 100) { strength.style.backgroundColor = "white" }
+    else { strength.style.backgroundColor = "lime" };
+    skill.innerHTML = (Character[1]>0) ? Character[1] : "X"; 
     skill.style.width = (10 + Character[1] * 3) + "px";
-    if (Character[1] < 20) { skill.style.backgroundColor = "red" };
-    if (Character[1] > 100) { skill.style.backgroundColor = "white" };
-    iq.innerHTML = Character[2];
+    if (Character[1] < 20) { skill.style.backgroundColor = "red" }
+    else if (Character[1] > 100) { skill.style.backgroundColor = "white" }
+    else { skill.style.backgroundColor = "lime" };
+    iq.innerHTML = (Character[2]>0) ? Character[2] : "X";
     iq.style.width = (10 + Character[2] * 3) + "px";
-    if (Character[2] < 20) { iq.style.backgroundColor = "red" };
-    if (Character[2] > 100) { iq.style.backgroundColor = "white" };
-    if (EnemyVal > 0) {
-        enemy.innerHTML = EnemyVal;
-        enemy.style.width = (10 + EnemyVal * 3) + "px";
+    if (Character[2] < 20) { iq.style.backgroundColor = "red" }
+    else if (Character[2] > 100) { iq.style.backgroundColor = "white" }
+    else { iq.style.backgroundColor = "lime" };
+    if (Steps % 10 == 0) {
+        nme.innerHTML = (EnemyVal>0) ? EnemyVal : "X";
+        nme.style.width = (10 + EnemyVal * 3) + "px";
         if (EnemyVal < 20) { enemy.style.backgroundColor = "black"; }
-        else { enemy.style.backgroundColor = "purple"; }
+        else { nme.style.backgroundColor = "purple"; }
     }
 }
 
@@ -279,13 +309,15 @@ function EroBtn() {
         let z = parseInt((x - y) / 2);
         EnemyVal -= z;
         PrintValues();
-        alert("Agyba-főbe vered. Veszít " + z + " Támadóerőt.");
+        document.getElementById("other").innerHTML = "Agyba-főbe vered. Veszít " + z + " Támadóerőt.";
+        document.getElementById("other").style.color = "lightskyblue";
         CheckBBDeath();
     } else {
         let z = parseInt((y - x) / 4);
         Character[0] -= z;
         PrintValues();
-        alert("A Big Bug eltalált! Vesztesz " + z + " Erőt.");
+        document.getElementById("other").innerHTML ="A Big Bug eltalált! Vesztesz " + z + " Erőt.";
+        document.getElementById("other").style.color = "red";
         CheckEnd();
     };
     if (EnemyVal > 0) { bbAttack(); };
@@ -297,13 +329,15 @@ function UgyBtn() {
         let z = parseInt((x - y) / 2);
         EnemyVal -= z;
         PrintValues();
-        alert("Sikerül kicselezned. Veszít " + z + " Támadóerőt.");
+        document.getElementById("other").innerHTML = "Sikerül kicselezned. Veszít " + z + " Támadóerőt.";
+        document.getElementById("other").style.color = "lightskyblue";
         CheckBBDeath();
     } else {
         let z = parseInt((y - x) / 4);
         Character[1] -= z;
         PrintValues();
-        alert("A Big Bug kritikus támadást vitt be! Vesztesz " + z + " Ügyességet.");
+        document.getElementById("other").innerHTML = "A Big Bug kritikus támadást vitt be! Vesztesz " + z + " Ügyességet.";
+        document.getElementById("other").style.color = "red";
         CheckEnd();
     };
     if (EnemyVal > 0) { bbAttack(); };
@@ -315,13 +349,15 @@ function EszBtn() {
         let z = parseInt((x - y) / 2);
         EnemyVal -= z;
         PrintValues();
-        alert("Sikerült túljárnod az eszén! Veszít " + z + " Támadóerőt.");
+        document.getElementById("other").innerHTML = "Sikerült túljárnod az eszén! Veszít " + z + " Támadóerőt.";
+        document.getElementById("other").style.color = "lightskyblue";
         CheckBBDeath();
     } else {
         let z = parseInt((y - x) / 4);
         Character[2] -= z;
         PrintValues();
-        alert("A Big Bug túl járt az eszeden. Tök hülyének érzed magad. Vesztesz " + z + " Észt.");
+        document.getElementById("other").innerHTML = "A Big Bug túl járt az eszeden. Tök hülyének érzed magad. Vesztesz " + z + " Észt.";
+        document.getElementById("other").style.color = "red";
         CheckEnd();
     };
     if (EnemyVal > 0) { bbAttack(); };
@@ -331,14 +367,12 @@ function FleeBtn() {
     Character[0] -= parseInt(XRooms[XRoom][2] * (1 + Math.random() * EnemyVal / 10));
     Character[1] -= parseInt(XRooms[XRoom][3] * (1 + Math.random() * EnemyVal / 10));
     Character[2] -= parseInt(XRooms[XRoom][4] * (1 + Math.random() * EnemyVal / 10));
-    alert("Menekülés közben az ellenfél egy iszonyatosat rádsóz! Vesztesz egy rakás pontot!");
-    document.body.setAttribute("style", "filter: blur(20px) brightness(0)")
-    EnemyVal = 0;
-    NewRoom();
+    PrintValues();
+    document.getElementById("other").innerHTML = "Megpróbálsz elmenekülni, de a Big Bug közben egy iszonyatosat rádsóz! Vesztesz egy rakás pontot! Ne légy gyáva!" + "<br><button onclick='next()'>Ez sok nekem!</button>";
+    document.getElementById("other").style.color = "red";
 }
 
 function bbAttack() {
-    alert("A Big Bug megpróbálja varázserejét használni ellened!");
     var x = parseInt(Math.random() * 3);
     if (XRooms[XRoom][2 + x] == 1) {
         switch (x) {
@@ -354,7 +388,7 @@ function bbAttack() {
     } else if (Math.random() < EnemyVal / 120) {
         document.getElementById("Flee").disabled = true;
     };
-    x = parseInt(Math.random() * 12);
+    x = parseInt(Math.random() * 11);
     switch (x) {
         case 0: document.getElementById("EroAttack").disabled = false;
             break;
@@ -401,8 +435,17 @@ function CheckBBDeath() {
         for (i = 0; i < 3; i++) {
             Character[i] += XRooms[XRoom][2 + i] * 5;
         }
-        alert("Legyőzted a Big Bugot! Jutalomból átszállt beléd a maradék ereje.");
-        document.body.setAttribute("style", "filter: blur(20px) brightness(0)")
-        NewRoom();
+        PrintValues();
+        document.getElementById("other").innerHTML = "Legyőzted a Big Bugot! Jutalomból átszállt beléd a maradék ereje." + "<br><button onclick='next()'>Jöhet a többi!</button>";
+        document.getElementById("other").style.color = "lightskyblue";
+        document.getElementById("EroAttack").disabled = true;
+        document.getElementById("UgyAttack").disabled = true;
+        document.getElementById("EszAttack").disabled = true;
+        document.getElementById("Flee").disabled = true;
     }
+}
+
+function next() {
+    document.body.setAttribute("style", "filter: blur(20px) brightness(0)");
+    NewRoom();
 }
