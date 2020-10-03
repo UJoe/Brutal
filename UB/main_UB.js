@@ -1,4 +1,4 @@
-var Character = [0, 0, 0];
+var Character = [];
 var Room = 0;
 var XRoom = 0;
 var Rooms = [
@@ -15,32 +15,35 @@ var Rooms = [
     ["./img/bear.jpg", "- Argh...szörcs...brumm! - üdvözöl egy <span>40</span> támadóerejű medve a száját nyalogatva. Valószínűleg meg kell vele küzdened...", "attack", 40],
     ["./img/orchard.jpg", "Ínycsiklandozó gyümölcsfák között vezet az utad. Ha akarsz, egyél!", "drink", 8],
     ["./img/mug.jpg", "Leülsz az útpadkára, hogy megigyál egy bögre kakaót, amikor hirtelen a bögre megelevenedik a kezedben és torz vigyora mögül rekedt sziszegéssel közli, hogy ő a Bög-Rém!!! Nagyon azért nem ijedsz meg tőle - inkább csak bosszant, hogy már a kakaódat sem ihatod meg nyugodtan -, mivel kb. <span>10</span> támadóerejűnek néz ki.", "attack", 10],
-    ["./img/csontik.jpg", "Amikor befordulsz egy sarkon, hirtelen több harcos csontvázba botlasz bele. A támadóerejük kb. <span>60</span> lehet, úgyhogy légy óvatos!", "attack", 60],
+    ["./img/csontik.jpg", "Amikor befordulsz egy sarkon, hirtelen több harcos csontvázba botlasz bele. A támadóerejük kb. <span>70</span> lehet, úgyhogy légy óvatos!", "attack", 70],
     ["./img/vial.png", "Találsz a zsebedben egy ampullát. Rejtély, hogy hogy került oda, de ha gondolod, idd meg a tartalmát!", "potion", 5],
     ["./img/verem.jpg", "Jaj ne!!! Beleestél egy sötét verembe, ahol furcsa gázok terjengnek! Minden erődre szükség van, hogy kimássz.", "trap", 6],
     ["./img/spiderweb.jpg", "Nem figyelsz eléggé és belegabalyodsz egy hatalmas, mérgező pókhálóba! Megpróbálsz kijutni.", "trap", 3],
     ["./img/dragon.jpg", "Ahogy fütyörészve sétálgatsz, véletlenül rálépsz valamilyen állatnak a farkára. Pechedre ez egy félelmetes sárkányhoz tartozott, akinek legalább <span>90</span> a támadóereje, basszus!", "attack", 90]
 ];
 var XRooms = [
-    ["./img/bigbug-1.jpeg", "Hirtelen a semmiből megjelenik egy Big Bug! Ilyenek Battle Beetle szolgái. Meg kell vele mérkőznöd. De ismered: ez Szunyogh Béla: az esze vág, mint a villám, de fizikailag nagyon béna.", 1, 2, 3],
-    ["./img/bigbug-2.jpg", "Hirtelen a semmiből megjelenik egy újabb Big Bug! Nincs mese: őt is le kell győznöd, hogy eljuss Battle Beetle-hez. Őt is ismered: Homlokizom Csárli, akinek brutális ereje van, de baromi ügyetlenül mozog.", 3, 1, 2],
-    ["./img/bigbug-3.jpg", "Hirtelen a semmiből megjelenik a harmadik Big Bug! Érzed, hogy egyre közelebb kerülsz Battle Beetle-hez. Rögtön ráveted magad. Ő Klo Tilda, aki nagyon ügyesen manőverezik a levegőben, viszont tök hülye.", 2, 3, 1]
+    ["./img/bigbug-1.jpeg", "Hirtelen a semmiből megjelenik egy Big Bug! Ilyenek Battle Beetle szolgái. Meg kell vele mérkőznöd. De ismered: ez Szunyogh Béla: az esze vág, mint a bugylibicska, de fizikailag igen visszamradt a fejlődésben.", 1, 2, 3],
+    ["./img/bigbug-2.jpg", "Hirtelen megjelenik egy újabb Big Bug! Nincs mese: őt is le kell győznöd, hogy eljuss Battle Beetle-hez. Őt is ismered: Homlokizom Csárli, akinek hatalmas ereje van, de marha ügyetlenül mozog.", 3, 1, 2],
+    ["./img/bigbug-3.jpg", "Hirtelen megjelenik a harmadik Big Bug! Érzed, hogy egyre közelebb kerülsz Battle Beetle-hez. Rögtön ráveted magad. Ő Klo Tilda, aki nagyon ügyesen manőverezik a levegőben, viszont tök hülye.", 2, 3, 1]
 ]
 var Steps = 0;
 var EnemyVal = 0;
 
 function ChooseStrong() {
     Character = [90, 30, 20];
+    localStorage.setItem("CharSprite", "img/strong.png");
     NewRoom();
 }
 
 function ChooseNinja() {
     Character = [50, 50, 40];
+    localStorage.setItem("CharSprite", "img/ninjagirl.jpg");
     NewRoom();
 }
 
 function ChooseDexter() {
     Character = [30, 40, 70];
+    localStorage.setItem("CharSprite", "img/smartboy.jpg");
     NewRoom();
 }
 
@@ -48,7 +51,7 @@ function ActionBtn() {
     switch (Rooms[Room][2]) {
         case "attack":
             var x = Rooms[Room][3];
-            if (x + Math.random() * 50 > Character[0] / 5 + Character[1] + Math.random() * 30) {
+            if (x + Math.random() * 50 > Character[0] / 5 + Character[1] + Math.random() * (50-Steps)) {
                 let y = parseInt(x / 12 + Math.random() * 5)
                 Character[0] -= y;
                 PrintValues();
@@ -172,13 +175,13 @@ function ActionBtn() {
             break;
 
         case "trap":
-            var x = parseInt(Rooms[Room][3] + Math.random() * 5);
+            var x = parseInt(Rooms[Room][3] + Math.random() * 3);
             var y = 0;
             if (Character[1] > Character[0]) {
                 y = 1;
                 if (Character[2] > Character[1]) { y = 2 }
             } else if (Character[2] > Character[0]) { y = 2 };
-            if ((Character[0] + Character[1] + Character[2] > x * 45) || Math.random() > x / 15) {
+            if ((Character[0] + Character[1] + Character[2] > x * 40) || Math.random() > x / 15) {
                 Character[y] -= parseInt(x / 3);
                 Character[0] -= parseInt(x / 2);
                 PrintValues();
@@ -235,12 +238,15 @@ function EscapeBtn() {
     }
 }
 
+//Új szoba
 function NewRoom() {
     Steps += 1;
     if (Steps == 40) {
-        document.body.innerHTML = "<img src='./img/bbeetle.jpg' style='display: block; margin-left: auto; margin-right: auto'>";
+        document.body.innerHTML = "<h1>MEGTALÁLTAD BATTLE BEETLE-T!<img src='./img/bbeetle.jpg' alt='Battle Beetle' style='display: block; margin-top: 20px; margin-left: auto; margin-right: auto; height: 600px;'><button onclick='Finale()'>Jöhet a végső harc!</button></h1>";
         document.body.setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px); transition: filter 1.5s");
-        alert("BATTLE BEETLE!");
+        localStorage.setItem("NewEro", Character[0]);
+        localStorage.setItem("NewUgy", Character[1]);
+        localStorage.setItem("NewEsz", Character[2]);
     } else if (Steps % 10 == 0) {
         XRoom = parseInt(Steps / 10) - 1;
         EnemyVal = 60 + XRoom * 20;
@@ -249,6 +255,9 @@ function NewRoom() {
         document.getElementById("room-pic").src = XRooms[XRoom][0];
         document.getElementById("room-desc").innerHTML = XRooms[XRoom][1];
         document.getElementById("enemy").innerHTML = EnemyVal;
+        PrintValues();
+        CheckEnd();
+        document.body.setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px); transition: filter 1.5s");
     } else {
         var YRoom = Room;
         Room = parseInt(Math.random() * Rooms.length);
@@ -261,10 +270,10 @@ function NewRoom() {
         document.getElementById("room-pic").src = Rooms[Room][0];
         document.getElementById("room-desc").innerHTML = Rooms[Room][1];
         if (Rooms[Room][2] == "trap") { document.getElementById("EscBtn").disabled = true; }
+        PrintValues();
+        CheckEnd();
+        document.body.setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px); transition: filter 1.5s");
     };
-    PrintValues();
-    CheckEnd();
-    document.body.setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px); transition: filter 1.5s");
 }
 
 function PrintValues() {
@@ -274,22 +283,26 @@ function PrintValues() {
     var nme = document.getElementById('enemy');
     strength.innerHTML = (Character[0]>0) ? Character[0] : "X";
     strength.style.width = (10 + Character[0] * 3) + "px";
+    strength.style.transition = "all 1s";
     if (Character[0] < 20) { strength.style.backgroundColor = "red" }
     else if (Character[0] > 100) { strength.style.backgroundColor = "white" }
     else { strength.style.backgroundColor = "lime" };
     skill.innerHTML = (Character[1]>0) ? Character[1] : "X"; 
     skill.style.width = (10 + Character[1] * 3) + "px";
+    skill.style.transition = "all 1s";
     if (Character[1] < 20) { skill.style.backgroundColor = "red" }
     else if (Character[1] > 100) { skill.style.backgroundColor = "white" }
     else { skill.style.backgroundColor = "lime" };
     iq.innerHTML = (Character[2]>0) ? Character[2] : "X";
     iq.style.width = (10 + Character[2] * 3) + "px";
+    iq.style.transition = "all 1s";
     if (Character[2] < 20) { iq.style.backgroundColor = "red" }
     else if (Character[2] > 100) { iq.style.backgroundColor = "white" }
     else { iq.style.backgroundColor = "lime" };
     if (Steps % 10 == 0) {
         nme.innerHTML = (EnemyVal>0) ? EnemyVal : "X";
         nme.style.width = (10 + EnemyVal * 3) + "px";
+        nme.style.transition = "all 1s";
         if (EnemyVal < 20) { enemy.style.backgroundColor = "black"; }
         else { nme.style.backgroundColor = "purple"; }
     }
@@ -370,6 +383,12 @@ function FleeBtn() {
     PrintValues();
     document.getElementById("other").innerHTML = "Megpróbálsz elmenekülni, de a Big Bug közben egy iszonyatosat rádsóz! Vesztesz egy rakás pontot! Ne légy gyáva!" + "<br><button onclick='next()'>Ez sok nekem!</button>";
     document.getElementById("other").style.color = "red";
+    if (Character[0] < 1 || Character[1] < 1 || Character[2] < 1) {
+        document.getElementById("EroAttack").disabled = true;
+        document.getElementById("UgyAttack").disabled = true;
+        document.getElementById("EszAttack").disabled = true;
+        document.getElementById("Flee").disabled = true;
+    };
 }
 
 function bbAttack() {
@@ -448,4 +467,8 @@ function CheckBBDeath() {
 function next() {
     document.body.setAttribute("style", "filter: blur(20px) brightness(0)");
     NewRoom();
+}
+
+function Finale() {
+    location.replace("shop_UB.html");
 }
