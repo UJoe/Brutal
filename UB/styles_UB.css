@@ -131,16 +131,17 @@ button:disabled {
 
 #other {
     margin: 10px;
+    color: lightpink;
 }
 
 #Mate {
     position: absolute;
-    height: 100px;
+    height: 120px;
     filter: opacity(0) blur(10px) brightness(0);
     border-radius: 25px;
 }
 
 #Mate:hover {
     filter: opacity(1) blur(0px) brightness(1);
-    transition: all 5s;
+    transition: all 3s;
 }

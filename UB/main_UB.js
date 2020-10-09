@@ -250,7 +250,7 @@ function NewRoom() {
     } else if (Steps % 10 == 0) {
         XRoom = parseInt(Steps / 10) - 1;
         EnemyVal = 60 + XRoom * 20;
-        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Minden támadásod után ő is megpróbál varázserejével visszatámadni!</p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><p>Ellenfél támadóereje: <span id='enemy'></span></p><p class='Order'>Hogyan támadsz rá?</p><button id='EroAttack' onclick='EroBtn()'>Nyers erővel</button><button id='UgyAttack' onclick='UgyBtn()'>Taktikusan</button><button id='EszAttack' onclick='EszBtn()'>Furfanggal</button><button id='Flee' onclick='FleeBtn()'>Sehogy</button><div id='other'></div>";
+        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Minden támadásod után ő is megpróbál varázserejével visszatámadni!</p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><p>Ellenfél támadóereje: <span id='enemy'></span></p><p class='Order'>Hogyan támadsz rá?</p><button id='EroAttack' onclick='EroBtn()'>Nyers erővel</button><button id='UgyAttack' onclick='UgyBtn()'>Taktikusan</button><button id='EszAttack' onclick='EszBtn()'>Furfanggal</button><button id='Flee' onclick='FleeBtn()'>Sehogy</button><div id='other'></div><br><div id='colossus'></div>";
         document.getElementById("counter").innerHTML = Steps;
         document.getElementById("room-pic").src = XRooms[XRoom][0];
         document.getElementById("room-desc").innerHTML = XRooms[XRoom][1];
@@ -483,7 +483,10 @@ function mate(n) {
 
 function Mateka(x) {
     Character[x] +=20;
-    document.getElementById("other").innerHTML = "- Mivel megtaláltál, segítek áthidalni a nehézségeket - szól a titokzatos varázsló!";
+    var node = document.createElement("P");
+    var textnode = document.createTextNode("- Mivel megtaláltál, segítek áthidalni a nehézségeket! - szól a titokzatos varázsló.");
+    node.appendChild(textnode);
+    document.getElementById("other").appendChild(node);
     PrintValues();
     document.getElementById("colossus").innerHTML="";
 }
