@@ -132,3 +132,15 @@ button:disabled {
 #other {
     margin: 10px;
 }
+
+#Mate {
+    position: absolute;
+    height: 100px;
+    filter: opacity(0) blur(10px) brightness(0);
+    border-radius: 25px;
+}
+
+#Mate:hover {
+    filter: opacity(1) blur(0px) brightness(1);
+    transition: all 5s;
+}

@@ -1,5 +1,5 @@
 var Char = {
-    pic: localStorage.getItem("CharSprite"),
+    pic: localStorage.getItem("NewPic"),
     ero: Number(localStorage.getItem("NewEro")),
     ugy: Number(localStorage.getItem("NewUgy")),
     esz: Number(localStorage.getItem("NewEsz")),
@@ -10,6 +10,7 @@ var Char = {
 var xero = Char.ero;
 var xugy = Char.ugy;
 var xesz = Char.esz;
+var timo;
 
 var EroRuhak = [
     {
@@ -234,13 +235,14 @@ function CheckObjectOut() {
 }
 
 function message(text) {
+    clearTimeout(timo);
     const a = document.getElementById("message");
     a.innerHTML = text;
-    setTimeout(function () {
-        a.style.filter = "opacity(0) blur(4px)"; 
+    timo = setTimeout(function () {
+        a.style.filter = "opacity(0) blur(6px)"; 
         a.style.left = "39cm"; 
         a.style.top = "10cm"; 
-        a.style.transition = "all 2s" }, text.length * 80)
+        a.style.transition = "all 2s"}, text.length * 80)
 };
 
 //Vásárlás
@@ -275,7 +277,7 @@ function BuyEro(x) {
             Char.arm -= EroRuhak[x].change[3];
             Char.seb -= EroRuhak[x].change[4];
             document.getElementById("message").setAttribute("style", "filter: opacity(1) blur(0)");
-            message("Eh, nem is kell neked ez a vacak " + EroRuhak[x].id + "!");
+            message("Eh, nem is kell ez a vacak " + EroRuhak[x].id + "!");
             document.getElementById(EroRuhak[x].id).setAttribute("style", "filter: brightness(1) invert(0); transition: all 1s");
             PrintVals();
             CheckObjectOut();
@@ -315,7 +317,7 @@ function BuyUgy(x) {
             Char.arm -= UgyRuhak[x].change[3];
             Char.seb -= UgyRuhak[x].change[4];
             document.getElementById("message").setAttribute("style", "filter: opacity(1) blur(0)");
-            message("Igazad van, egy " + UgyRuhak[x].id + " nélkül nagyobb a kihívás!");
+            message("Egy " + UgyRuhak[x].id + " nélkül nagyobb a kihívás!");
             document.getElementById(UgyRuhak[x].id).setAttribute("style", "filter: brightness(1) invert(0); transition: all 1s");
             PrintVals();
             CheckObjectOut();
@@ -345,7 +347,7 @@ function BuyEsz(x) {
             EszRuhak[x].status = 1;
             xesz += p;
             document.getElementById("message").setAttribute("style", "filter: opacity(1) blur(0)");
-            message("Talán mégsem kell majd ez a fura " + EszRuhak[x].id + "...");
+            message("Talán mégsem kell ez a fura " + EszRuhak[x].id + "...");
             document.getElementById(EszRuhak[x].id).setAttribute("style", "filter: brightness(1) invert(0); transition: all 1s");
             PrintVals();
             CheckObjectOut();
@@ -356,6 +358,16 @@ function BuyEsz(x) {
 }
 
 function cart() {
-    alert("BB-vel akarsz harcolni?! Na, ne röhögtess!")
+    localStorage.setItem("NewEro", Char.ero);
+    localStorage.setItem("NewUgy", Char.ugy);
+    localStorage.setItem("NewEsz", Char.esz);
+    localStorage.setItem("NewArm", Char.arm);
+    localStorage.setItem("NewSeb", Char.seb);
+    localStorage.setItem("NewPic", Char.pic);
+    localStorage.setItem("NewPia", (EszRuhak[0].status == 2) ? true : false);
+    localStorage.setItem("NewKoc", (EszRuhak[1].status == 2) ? true : false);
+    localStorage.setItem("NewBom", (EszRuhak[2].status == 2) ? true : false);
+    localStorage.setItem("NewAlt", (EszRuhak[3].status == 2) ? true : false);
+    location.replace("final.html");
 }
 

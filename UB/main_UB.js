@@ -22,7 +22,7 @@ var Rooms = [
     ["./img/dragon.jpg", "Ahogy fütyörészve sétálgatsz, véletlenül rálépsz valamilyen állatnak a farkára. Pechedre ez egy félelmetes sárkányhoz tartozott, akinek legalább <span>90</span> a támadóereje, basszus!", "attack", 90]
 ];
 var XRooms = [
-    ["./img/bigbug-1.jpeg", "Hirtelen a semmiből megjelenik egy Big Bug! Ilyenek Battle Beetle szolgái. Meg kell vele mérkőznöd. De ismered: ez Szunyogh Béla: az esze vág, mint a bugylibicska, de fizikailag igen visszamradt a fejlődésben.", 1, 2, 3],
+    ["./img/bigbug-1.jpeg", "Hirtelen a semmiből megjelenik egy Big Bug! Ilyenek Battle Beetle szolgái. Meg kell vele mérkőznöd. De ismered: ez Szunyogh Béla: az esze vág, mint a bugylibicska, de fizikailag igen visszamaradt a fejlődésben.", 1, 2, 3],
     ["./img/bigbug-2.jpg", "Hirtelen megjelenik egy újabb Big Bug! Nincs mese: őt is le kell győznöd, hogy eljuss Battle Beetle-hez. Őt is ismered: Homlokizom Csárli, akinek hatalmas ereje van, de marha ügyetlenül mozog.", 3, 1, 2],
     ["./img/bigbug-3.jpg", "Hirtelen megjelenik a harmadik Big Bug! Érzed, hogy egyre közelebb kerülsz Battle Beetle-hez. Rögtön ráveted magad. Ő Klo Tilda, aki nagyon ügyesen manőverezik a levegőben, viszont tök hülye.", 2, 3, 1]
 ]
@@ -31,19 +31,19 @@ var EnemyVal = 0;
 
 function ChooseStrong() {
     Character = [90, 30, 20];
-    localStorage.setItem("CharSprite", "img/strong.png");
+    localStorage.setItem("NewPic", "img/strong.png");
     NewRoom();
 }
 
 function ChooseNinja() {
     Character = [50, 50, 40];
-    localStorage.setItem("CharSprite", "img/ninjagirl.jpg");
+    localStorage.setItem("NewPic", "img/ninjagirl.jpg");
     NewRoom();
 }
 
 function ChooseDexter() {
     Character = [30, 40, 70];
-    localStorage.setItem("CharSprite", "img/smartboy.jpg");
+    localStorage.setItem("NewPic", "img/smartboy.jpg");
     NewRoom();
 }
 
@@ -92,7 +92,7 @@ function ActionBtn() {
             break;
 
         case "drink":
-            var x = parseInt(1 + Math.random() * Rooms[Room][3]);
+            var x = parseInt(Steps/9 + Math.random() * Rooms[Room][3]);
             Character[0] += x;
             PrintValues();
             document.getElementById("other").innerHTML = "Nyersz " + x + " Erőt és felfrissülten továbbgaloppozol.";
@@ -265,7 +265,7 @@ function NewRoom() {
             Room += 1;
             if (Room == Rooms.length) { Room = 0 };
         };
-        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><button id='ActBtn' onclick='ActionBtn()'>Akció</button><button id='EscBtn' onclick='EscapeBtn()'>Tovább</button><div id='other'></div>";
+        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><button id='ActBtn' onclick='ActionBtn()'>Akció</button><button id='EscBtn' onclick='EscapeBtn()'>Tovább</button><div id='other'></div><br><div id='colossus'></div>";
         document.getElementById("counter").innerHTML = Steps;
         document.getElementById("room-pic").src = Rooms[Room][0];
         document.getElementById("room-desc").innerHTML = Rooms[Room][1];
@@ -284,20 +284,20 @@ function PrintValues() {
     strength.innerHTML = (Character[0]>0) ? Character[0] : "X";
     strength.style.width = (10 + Character[0] * 3) + "px";
     strength.style.transition = "all 1s";
-    if (Character[0] < 20) { strength.style.backgroundColor = "red" }
-    else if (Character[0] > 100) { strength.style.backgroundColor = "white" }
+    if (Character[0] < 20) { strength.style.backgroundColor = "red"; mate(0); }
+    else if (Character[0] > 99) { strength.style.backgroundColor = "white" }
     else { strength.style.backgroundColor = "lime" };
     skill.innerHTML = (Character[1]>0) ? Character[1] : "X"; 
     skill.style.width = (10 + Character[1] * 3) + "px";
     skill.style.transition = "all 1s";
-    if (Character[1] < 20) { skill.style.backgroundColor = "red" }
-    else if (Character[1] > 100) { skill.style.backgroundColor = "white" }
+    if (Character[1] < 20) { skill.style.backgroundColor = "red"; mate(1); }
+    else if (Character[1] > 99) { skill.style.backgroundColor = "white" }
     else { skill.style.backgroundColor = "lime" };
     iq.innerHTML = (Character[2]>0) ? Character[2] : "X";
     iq.style.width = (10 + Character[2] * 3) + "px";
     iq.style.transition = "all 1s";
-    if (Character[2] < 20) { iq.style.backgroundColor = "red" }
-    else if (Character[2] > 100) { iq.style.backgroundColor = "white" }
+    if (Character[2] < 20) { iq.style.backgroundColor = "red"; mate(2); }
+    else if (Character[2] > 99) { iq.style.backgroundColor = "white" }
     else { iq.style.backgroundColor = "lime" };
     if (Steps % 10 == 0) {
         nme.innerHTML = (EnemyVal>0) ? EnemyVal : "X";
@@ -309,8 +309,8 @@ function PrintValues() {
 }
 
 function CheckEnd() {
-    if (Character[0] < 1) { document.body.innerHTML = "<h1>MEGHALTÁL!</h1>" };
-    if (Character[1] < 1 || Character[2] < 1) { document.body.innerHTML = "<h1>Annyira gyökér lettél, hogy nem érdemes tovább folytatni!</h1>" };
+    if (Character[0] < 1) { document.body.innerHTML = "<h1>MEGHALTÁL!</h1><br><p class='Order'>Nyomd meg az F5-öt az időgép aktiválásához!</p>" };
+    if (Character[1] < 1 || Character[2] < 1) { document.body.innerHTML = "<h1>Annyira gyökér lettél, hogy nem érdemes tovább folytatni!</h1><br><p class='Order'>Nyomd meg az F5-öt az időgép aktiválásához!</p>" };
 }
 
 //Spéci szobák
@@ -471,4 +471,19 @@ function next() {
 
 function Finale() {
     location.replace("shop_UB.html");
+}
+
+function mate(n) {
+    if (Steps % 10 == 0) {return};
+    CheckEnd();
+    document.getElementById("colossus").innerHTML = `<img id='Mate' onclick= 'Mateka(${n})' src='./img/Mate.PNG'>`
+    let x= parseInt(1+95*Math.random());
+    document.getElementById("Mate").style.left = x+"%";
+}
+
+function Mateka(x) {
+    Character[x] +=20;
+    document.getElementById("other").innerHTML = "- Mivel megtaláltál, segítek áthidalni a nehézségeket - szól a titokzatos varázsló!";
+    PrintValues();
+    document.getElementById("colossus").innerHTML="";
 }

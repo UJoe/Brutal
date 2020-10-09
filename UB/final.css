@@ -1,0 +1,8 @@
+@font-face {
+    font-family: Oldenburg;
+    src: url(./fonts/Oldenburg-Regular.ttf);
+}
+
+body {
+    font-family: Oldenburg;
+}
