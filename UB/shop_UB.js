@@ -85,7 +85,7 @@ var EszRuhak = [
         num: 0,
         id: "gyógypálesz",
         status: 1,
-        desc: "DUGIPIÁS FLASKA&#10;Jobb, mint a dopping.&#10;Frissülés: 4",
+        desc: "DUGIPIÁS FLASKA&#10;Jobb, mint a dopping.&#10;Frissülés: 3 kör",
         price: 30,
         refresh: 4
     },
@@ -93,7 +93,7 @@ var EszRuhak = [
         num: 1,
         id: "kocka",
         status: 1,
-        desc: "ENGEDELMES KOCKA&#10;Meghatározhatod,&#10;mennyit dobsz.&#10;Frissülés: 2",
+        desc: "ENGEDELMES KOCKA&#10;Meghatározhatod,&#10;mennyit dobsz.&#10;Frissülés: 2 kör",
         price: 40,
         refresh: 2
     },
@@ -101,7 +101,7 @@ var EszRuhak = [
         num: 2,
         id: "bomba",
         status: 1,
-        desc: "HUNCUT KIS BOMBA&#10;Megszivatod BB-t,&#10;ha melletted áll.&#10;Frissülés: 1",
+        desc: "HUNCUT KIS BOMBA&#10;Megszivatod BB-t,&#10;ha melletted áll.&#10;Frissülés: 1 kör",
         price: 60,
         refresh: 1
     },
@@ -109,7 +109,7 @@ var EszRuhak = [
         num: 3,
         id: "altatópuska",
         status: 1,
-        desc: "ALTATÓPUSKA&#10;Egy időre kivonja a&#10;forgalomból BB-t&#10;Frissülés: 3",
+        desc: "ALTATÓPUSKA&#10;Egy időre kivonja a&#10;forgalomból BB-t&#10;Frissülés: 3 kör",
         price: 90,
         refresh: 3
     }];
@@ -364,10 +364,10 @@ function cart() {
     localStorage.setItem("NewArm", Char.arm);
     localStorage.setItem("NewSeb", Char.seb);
     localStorage.setItem("NewPic", Char.pic);
-    localStorage.setItem("NewPia", (EszRuhak[0].status == 2) ? true : false);
-    localStorage.setItem("NewKoc", (EszRuhak[1].status == 2) ? true : false);
-    localStorage.setItem("NewBom", (EszRuhak[2].status == 2) ? true : false);
-    localStorage.setItem("NewAlt", (EszRuhak[3].status == 2) ? true : false);
+    localStorage.setItem("NewPia", EszRuhak[0].status);
+    localStorage.setItem("NewKoc", EszRuhak[1].status);
+    localStorage.setItem("NewBom", EszRuhak[2].status);
+    localStorage.setItem("NewAlt", EszRuhak[3].status);
     location.replace("final.html");
 }
 

@@ -8,8 +8,8 @@ var Rooms = [
     ["./img/banya.jpg", "- Már megint hol jártál, Lajos, teeee?! - ordít rád egy maximum <span>20</span> támadóerejű, erősen rövidlátó vén banya és fenyegetően megindul feléd...", "attack", 20],
     ["./img/kut.jpg", "Ahogy sétálsz, egyszer csak egy kútba botlasz bele. Ha akarsz, igyál.", "drink", 4],
     ["./img/okosteszt.jpg", "Felkeresed régi tanárodat. Úgy tűnik, rá nem hatott Battle Beetle varázslata. Tanácsot kérsz tőle, mit tegyél. Jó sok dolgot elmond Neked, de vajon mennyit tudsz belőle felfogni?", "learn", 40],
-    ["./img/P-tunder.jpg", "Ahogy sétálgatsz, egyszercsak meglátsz egy lányt a folyópart mellett ülni. Különösen békés teremtésnek tűnik ebben a kaotikus világban. Leülsz mellé és megszólítód. Elmondja, hogy Cedric nevű törpehörcsöge beleesett a folyóba és egy faágba kapaszkodva úszik lefelé. Segítesz neki?", "help", 50],
-    ["./img/sadowl.jpg", "Szívszorító hangokat hallasz egy fa koronája közül. Felpillantva meglátsz egy szomorú baglyot. Megpróbálsz neki vicceket mesélni, hátha jobb kedvre derül.", "help", 20],
+    ["./img/P-tunder.jpg", "Ahogy sétálgatsz, egyszercsak meglátsz egy lányt a folyópart mellett ülni. Különösen békés teremtésnek tűnik ebben a kaotikus világban. Leülsz mellé és megszólítód. Elmondja, hogy Cedric nevű törpehörcsöge beleesett a folyóba és egy faágba kapaszkodva úszik lefelé. Segítesz neki?", "help", 60],
+    ["./img/sadowl.jpg", "Szívszorító hangokat hallasz egy fa koronája közül. Felpillantva meglátsz egy szomorú baglyot. Megpróbálsz neki vicceket mesélni, hátha jobb kedvre derül.", "help", 35],
     ["./img/potion.jpg", "Találsz egy bokorban egy varázsitalt. Megiszod?", "potion", 10],
     ["./img/dwarf.png", "Találkozol egy jóságos öreg törpével. Ha gondolod, kérdezd ki, hátha tud segíteni.", "learn", 15],
     ["./img/bear.jpg", "- Argh...szörcs...brumm! - üdvözöl egy <span>40</span> támadóerejű medve a száját nyalogatva. Valószínűleg meg kell vele küzdened...", "attack", 40],
@@ -111,17 +111,17 @@ function ActionBtn() {
 
         case "help":
             var x = parseInt(Rooms[Room][3] / 8 + Math.random() * 3);
-            var y = parseInt(x / 2.5);
-            if (Character[1] + Character[2] / 10 > Rooms[Room][3] + Math.random() * 10) {
-                for (let i = 0; i < 3; i++) { Character[i] += x };
+            var y = parseInt(x / 2);
+            if (Character[1] + Character[2] / 10 > Rooms[Room][3] + Math.random() * 20) {
+                for (let i = 0; i < 3; i++) { Character[i] += y };
                 PrintValues();
-                document.getElementById("other").innerHTML = "Sikeresen segítettél! Jutalomból minden értéked nőtt " + x + " ponttal!" + "<br><button onclick='next()'>Szívesen, máskor is!</button>";
+                document.getElementById("other").innerHTML = "Sikeresen segítettél! Jutalomból minden értéked nőtt " + y + " ponttal!" + "<br><button onclick='next()'>Szívesen, máskor is!</button>";
                 document.getElementById("other").style.color = "lightskyblue";
             } else {
-                for (let i = 0; i < 3; i++) { Character[i] -= y };
+                for (let i = 0; i < 3; i++) { Character[i] += x };
                 PrintValues();
-                document.getElementById("other").innerHTML = "Nem sikerült segítened, amiben teljesen összetörsz. Minden értéked csökken " + y + " ponttal!" + "<br><button onclick='next()'>Bocs!</button>";
-                document.getElementById("other").style.color = "red";
+                document.getElementById("other").innerHTML = "Bár nem sikerült segítened, mivel gyenge képességeid ellenére is segítőkész voltál, jutalomból minden értéked nő " + x + " ponttal!" + "<br><button onclick='next()'>Köszönöm és bocs!</button>";
+                document.getElementById("other").style.color = "lightskyblue";
             };
             document.getElementById("ActBtn").disabled = true;
             document.getElementById("EscBtn").disabled = true;
@@ -224,7 +224,7 @@ function EscapeBtn() {
             break;
 
         case "help":
-            let y = parseInt(Rooms[Room][3] / 10);
+            let y = parseInt((Rooms[Room][3]+ Math.random()*10) / 10 );
             for (let i = 0; i < 3; i++) { Character[i] -= y };
             PrintValues();
             document.getElementById("other").innerHTML = "Mivel nem segítettél, elszégyelled magad. Minden értéked csökken " + y + " ponttal." + "<br><button onclick='next()'>Kellett volna?</button>";

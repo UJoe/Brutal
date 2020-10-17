@@ -5,4 +5,164 @@
 
 body {
     font-family: Oldenburg;
+    background-image: url("./img/dark_final.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: yellow;
 }
+
+p {
+    margin-left: 30px;
+}
+
+h1 {text-align: center;
+    color: red;
+    filter: drop-shadow(0px 16px 20px yellow);
+    font-size: 200%;
+}
+
+#magno {
+    position: fixed;
+    top: 80px;
+    right: 55px;
+    transform: scale(0.9);
+}
+
+#board {
+    margin-top: 50px;
+}
+
+.mezo {
+    position: fixed;
+    height: 140px;
+    width: 140px;
+    border: double lightgreen;
+    border-radius: 20px;
+}
+
+#bab0, #bab1 {
+    position: absolute;
+    height: 65px;
+    width: 65px;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+#CharP:active, #BBP:active {
+    filter: brightness(1.5);
+    transform: scale(2);
+    transition: all 1s;
+}
+
+.ObjPic {
+    position: relative;
+    display: inline-block;
+    top: 480px;
+    height: 70px;
+    width: 70px;
+    margin: 5px 5px 5px 50px;
+    border-radius: 25px;
+    opacity: 0.6;
+}
+
+.ObjPic:hover {
+    border: solid 5px red;
+    margin: 0px 0px 0px 45px;
+}
+
+.ObjPic:active {
+    transform: scale(1.2);
+}
+
+.UpNo {
+    position: relative;
+    display: inline-block;
+    top: 490px;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), cyan, rgba(0,0,0,0));
+    color:darkblue;
+    margin: 0px 5px 0px 50px;
+    border-radius: 50%;
+    font-size: large;
+    font-weight: bold;
+    width: 70px;
+    text-align: center;
+}
+
+#values {
+    position: absolute;
+    left: 42%;
+    top: 71%;
+}
+
+#dice-btn {
+    position: absolute;
+    bottom: 50px;
+    left: 100px;
+    transform: scale(2);
+    color: red;
+    background-color: darkblue;
+    border: solid 2px limegreen;
+    border-radius: 50%;
+    transition: all 0.5s;
+    font-weight: bold;
+}
+
+#dice-btn:hover {
+    transform: scale(2.2);
+    transition: all 0.3s;
+}
+
+#dice-btn:active {
+    filter: invert(1);
+}
+
+#dice-btn:disabled {
+    transform: scale(0.1);
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+td, th {
+    width: 500px;
+    padding: 5px;
+    font-size: large;
+}
+
+th {
+    padding: 5px 15px;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(120,0,255,0.5), #0440FC,  rgba(120,0,255,0.5), rgba(0,0,0,0));
+    color: lightyellow;
+    border-radius: 50%;
+}
+
+.CharVal, .BBVal {
+   display: inline-block;
+   width: 0px;
+   text-align: left;
+   position: absolute;
+}
+
+.CharVal {
+    color: blue;
+    background-color: lime;
+    left: 12%;
+}
+
+.BBVal {
+    color: white;
+    background-color: purple;
+    left: 62%;
+}
+
+#message {
+    position: absolute;
+    left: 15%;
+    top: 41%;
+    opacity: 1;
+    background-image: radial-gradient(circle, rgba(192, 242, 227, 0.5), rgba(255, 255, 0, 0));
+    color:cyan;
+    padding: 2px;
+    font-size: 200%;
+    font-weight: bold;
+}
+
