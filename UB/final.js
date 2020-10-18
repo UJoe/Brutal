@@ -6,7 +6,7 @@ var aarm = Number(localStorage.getItem("NewArm"));
 var aseb = Number(localStorage.getItem("NewSeb"));
 
 var bpic = "img/bbeetle.jpg";
-var bero = (aero < 100) ? parseInt(100 - Math.random() * 60) : parseInt(100 + Math.random() * 60);
+var bero = (aero < 100) ? parseInt(100 - Math.random() * 40) : parseInt(100 + Math.random() * 80);
 var bugy = (augy < 100) ? parseInt(100 - Math.random() * 60) : parseInt(100 + Math.random() * 60);
 var besz = (aesz < 100) ? parseInt(100 - Math.random() * 60) : parseInt(100 + Math.random() * 60);
 var barm = (aarm < 15) ? parseInt(15 - Math.random() * 10) : parseInt(15 + Math.random() * 10);
@@ -41,17 +41,21 @@ var alt = (localStorage.getItem("NewAlt") == "2") ? true : false;
 var piaUp = 3;
 var kocUp = 2;
 var bomUp = 1;
-var altUp = 3;
+var altUp = 4;
+var sleep = 0;
 
 var Fields = [
     ["sima", "./img/grass.jpg"],
     ["sima", "./img/grass.jpg"],
     ["sima", "./img/grass.jpg"],
     ["bogyo", "./img/berries.jpg"],
-    ["merleg", "./img/merleg.jpg"],
+    ["fa", "./img/beast-fa.jpg"],
+    ["manti", "./img/beast-manti.jpg"],
+    ["bika", "./img/beast-bika.jpg"],
     ["boxer", "./img/erdei.jpg"],
     ["katapult", "./img/katapult.jpg"],
     ["meglepi", "./img/question.jpg"],
+    ["meglepi", "./img/question.jpg"]
 ]
 
 var Board = [["start", "./img/start.jpg"]];
@@ -95,7 +99,7 @@ function initboard() {
     if (bom === true) { objectDiv = objectDiv + "<img class='ObjPic' id='bomP' onclick='UseBomba()' src='./img/bomba.jpg'>" };
     if (alt === true) { objectDiv = objectDiv + "<img class='ObjPic' id='altP' onclick='UseAltato()' src='./img/altatópuska.jpg'>" };
     document.getElementById("objects").innerHTML = objectDiv;
-    document.getElementById("dice").innerHTML = "<button id='dice-btn' onclick='Dobas()'>Lépés</button>"
+    document.getElementById("dice").innerHTML = "<button id='dice-btn' onclick='Dobas(0)'>Lépés</button>";
 }
 
 function updateVals() {
@@ -170,11 +174,18 @@ function message(text) {
     }
 }
 
-function Dobas() {
+function Dobas(d) {
     document.getElementById("dice-btn").disabled = true;
-    var d = parseInt(1 + 3 * Math.random())
-    Move(0, d, true);
-    setTimeout(function () { d = parseInt(1 + 4 * Math.random()); Move(1, d, true) }, 3000);
+    document.getElementById("other").innerHTML = "";
+    if (d == 0) { d = parseInt(1 + 3 * Math.random()) }
+    Move(0, d);
+    if (sleep > 0) {
+        sleep -= 1;
+        if (sleep == 0) { document.getElementById("bab1").style.filter = "opacity(1) sepia(0)"; }
+    }
+    if (sleep == 0) { setTimeout(function () { d = parseInt(1 + 4 * Math.random()); Move(1, d) }, 2000); }
+    setTimeout(function () { Track(0) }, 4000);
+    if (sleep == 0) { setTimeout(function () { Track(1) }, 6000) };
     setTimeout(function () {
         document.getElementById("dice-btn").disabled = false;
         if (pia === true && piaUp > 0) { piaUp -= 1 };
@@ -182,12 +193,86 @@ function Dobas() {
         if (bom === true && bomUp > 0) { bomUp -= 1 };
         if (alt === true && altUp > 0) { altUp -= 1 };
         updateVals();
-    }, 5000);
+    }, 6500);
 }
 
-function Move(pl, num, eff) {
+function UsePálesz() {
+    if (piaUp > 0) { message("Még " + piaUp + " kört kell erre várnod!"); return };
+    var x = parseInt(10 + Math.random() * 5);
+    var y = 0;
+    if (Char[0].ugy < Char[0].ero) {
+        y = 1;
+        if (Char[0].esz < Char[0].ugy) { y = 2 }
+    } else if (Char[0].esz < Char[0].ero) { y = 2 };
+    switch (y) {
+        case 0:
+            message("Kétszeresére dagadnak az izmaid, nyersz " + x + " Erőt!");
+            Char[0].ero += x;
+            break;
+        case 1:
+            message("Úgy pattogsz, mint egy ninja, nyersz " + x + " Ügyességet!");
+            Char[0].ugy += x;
+            break;
+        case 2:
+            message("Kitisztul az elméd, nyersz " + x + " Észt!");
+            Char[0].esz += x;
+            break;
+    }
+    PrintVals();
+    piaUp = 4;
+}
+
+function UseKocka() {
+    if (kocUp > 0) { message("Még " + kocUp + " kört kell erre várnod!"); return };
+    document.getElementById("other").innerHTML = `
+    <img class='kocPic' onclick='Dobas(1)' src='./img/kocka-1.png' style='left: 50px'>
+    <img class='kocPic' onclick='Dobas(2)' src='./img/kocka-2.png' style='left: 120px'>
+    <img class='kocPic' onclick='Dobas(3)' src='./img/kocka-3.png' style='left: 190px'>
+    <img class='kocPic' onclick='Dobas(4)' src='./img/kocka-4.png' style='left: 260px'>`;
+    document.getElementById("dice-btn").disabled = true;
+    kocUp = 3;
+}
+
+function UseBomba() {
+    if (bomUp > 0) { message("Még " + bomUp + " kört kell erre várnod!"); return };
+    var x = 1 + Math.round(Char[0].ero / 100 + Char[0].ugy / 150);
+    if (Math.abs(Char[0].pos - Char[1].pos) > x) { message("Túl messze van Battle Beetle, legfeljebb " + x + " mezőre tudsz dobni!"); return };
+    var x = parseInt(10 + Math.random() * 5);
+    var y = 0;
+    if (Char[1].ugy > Char[1].ero) {
+        y = 1;
+        if (Char[1].esz > Char[1].ugy) { y = 2 }
+    } else if (Char[1].esz > Char[1].ero) { y = 2 };
+    switch (y) {
+        case 0:
+            message("A bomba Battle Beetle mellkasának csapódik. Veszít " + x + " Erőt!");
+            Char[1].ero -= x;
+            break;
+        case 1:
+            message("A bomba Battle Beetle egyik lábát találja el. Veszít " + x + " Ügyességet!");
+            Char[1].ugy -= x;
+            break;
+        case 2:
+            message("A bomba Battle Beetle fejénél robban. Veszít " + x + " Észt!");
+            Char[1].esz -= x;
+            break;
+    }
+    PrintVals();
+    CheckDeath();
+    bomUp = 2;
+}
+
+function UseAltato() {
+    if (altUp > 0) { message("Még " + altUp + " kört kell erre várnod!"); return };
+    x = parseInt(1 + Math.random() * Char[1].pos / 8);
+    message("Battle Beetle-t " + x + " körre kivontad a forgalomból!");
+    sleep = x + 1;
+    document.getElementById("bab1").style.filter = "opacity(0.5) sepia(1)";
+    altUp = 5;
+}
+
+function Move(pl, num) {
     Char[pl].pos += num;
-    message(num + "-t dobtál.");
     var p = Char[pl].pos;
     var x = 0;
     var y = 0;
@@ -201,39 +286,244 @@ function Move(pl, num, eff) {
     document.getElementById("bab" + pl).style.top = y + "px";
     document.getElementById("bab" + pl).style.transition = "all 1s";
     CheckFight(pl, pl2);
-    if (eff != true) { return };
 }
 
 function CheckFight(pl1, pl2) {
     if (Char[pl1].pos == Char[pl2].pos) {
         var x = (Char[pl1].ugy + Char[pl1].ero / 5 + Char[pl1].esz / 10 + Math.random() * 40) - (Char[pl2].ugy + Char[pl2].ero / 5 + Char[pl2].esz / 10 + Math.random() * 40)
-        setTimeout(function() {
-            if (x > 0) {
-            Move(pl2, -1, false);
-            var y = parseInt(Char[pl1].seb + Math.random() * x / 2 - Char[pl2].arm);
-            if (y < 1) { y = 1 };
-            if (Char[pl1].esz < Char[pl2].esz + Char[pl2].arm + Math.random() * 10) {
-                message("Sikeres támadás!");
-                Char[pl2].ero -= y;
-                PrintVals();
-                CheckDeath();
+        setTimeout(function () {
+            if (x > 0 || (pl1 == 0 && sleep > 0)) {
+                Move(pl2, -1);
+                var y = parseInt(Char[pl1].seb + Char[pl1].ero / 10 + Math.random() * x - Char[pl2].arm);
+                if (y < 1) { y = 1 };
+                if ((Char[pl1].esz > Char[pl2].esz + Char[pl2].arm + Math.random() * 10) || (pl1 == 0 && sleep > 0)) {
+                    message("Kritikus támadás!")
+                    Char[pl2].ero -= y * 2;
+                    Char[pl2].ugy -= parseInt(y / 5);
+                    Char[pl2].esz -= parseInt(y / 10);
+                    Char[pl2].arm -= 1;
+                    Char[pl2].seb -= 1;
+                    PrintVals();
+                    CheckDeath();
+                } else {
+                    message("Sikeres támadás!");
+                    Char[pl2].ero -= y;
+                    PrintVals();
+                    CheckDeath();
+                }
             } else {
-                message("Kritikus támadás!")
-                Char[pl2].ero -= y * 2;
-                Char[pl2].ugy -= parseInt(y / 5);
-                Char[pl2].esz -= parseInt(y / 10);
-                Char[pl2].arm -= 1;
-                Char[pl2].seb -= 1;
-                PrintVals();
+                Move(pl1, -1);
+                message("Sikertelen támadás.")
+            }
+        }, 1000);
+    }
+}
+
+function Track(pl) {
+
+    switch (Board[Char[pl].pos][0]) {
+        case "bogyo":
+            var x = parseInt(5 + Math.random() * Char[pl].pos) * 2;
+            Char[pl].ero += x;
+            if (pl == 0) { message("Jót eszel a gyümölcsből, kapsz " + x + " Erőt.") } else {
+                message("Battle Beetle megtömi a pocakját. Kap " + x + " Erőt.");
+            }
+            PrintVals();
+            break;
+
+        case "fa":
+            if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (20 + Math.random() * 30)) {
+                Char[pl].ugy += 5;
+                if (pl == 0) { message("Rád támadt egy gonosz fa, de pozdorját csináltál belőle.") } else {
+                    message("Battle Beetle-re támadt egy fa, de ellátta a baját.");
+                }
+            } else {
+                var x = parseInt(10 + Math.random() * 10 - Char[pl].arm);
+                if (x < 1) { x = 1 };
+                Char[pl].ero -= x;
+                if (pl == 0) { message("Rád támadt egy gonosz fa! Vesztesz " + x + " Erőt!") } else {
+                    message("Végre Battle Beetle-re támadt az egyik fa! Veszít " + x + " Erőt.");
+                }
                 CheckDeath();
             }
-        } else {
-            Move(pl1, -1, false);
-            message("Sikertelen támadás.")
-        }}, 1500);
+            PrintVals();
+            break;
+
+        case "manti":
+            if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (50 + Math.random() * 60)) {
+                Char[pl].ugy += 10;
+                if (pl == 0) { message("Rád támadt egy manticore, de szőnyeget csináltál belőle.") } else {
+                    message("Battle Beetle-re támadt egy manticore, de sajnos BB nyert.");
+                }
+            } else {
+                var x = parseInt(20 + Math.random() * 20 - Char[pl].arm);
+                if (x < 1) { x = 2 };
+                Char[pl].ero -= x;
+                if (pl == 0) { message("Egy alattomos manticore " + x + " Erőt sebzett rajtad!") } else {
+                    message("Egy jó fej manticore ellátta Battle Beetle baját.");
+                }
+                CheckDeath();
+            }
+            PrintVals();
+            break;
+
+        case "bika":
+            if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (80 + Math.random() * 90)) {
+                Char[pl].ugy += 15;
+                if (pl == 0) { message("Rád támadt egy böszme szörny, de sikerült móresre tanítanod.") } else {
+                    message("Battle Beetle-re támadt egy kedves szörny, mire ő hidegvérrel lemészárolta.");
+                }
+            } else {
+                var x = parseInt(30 + Math.random() * 30 - Char[pl].arm);
+                if (x < 1) { x = 3 };
+                Char[pl].ero -= x;
+                if (pl == 0) { message("Karjába zárt egy vérengző nyörny. Vesztesz " + x + " Erőt!") } else {
+                    message("Másnak is elege lett Battle Beetle-ből és agyba-főbe verte.");
+                }
+                CheckDeath();
+            }
+            PrintVals();
+            break;
+
+        case "boxer":
+            var x = parseInt(1 + pl + Math.random() * 4);
+            Char[pl].ero -= x * 10;
+            Move(pl, -x);
+            if (pl == 0) { message("Hirtelen előugrik egy erdei boxoló és egy irtózatosat bemos Neked.") } else {
+                message("Egy erdei boxoló iszonyatosan hókon nyomja Battle Beetle-t.");
+            }
+            PrintVals();
+            CheckDeath();
+            break;
+
+        case "katapult":
+            var x = parseInt(1 - pl + Math.random() * 3);
+            Char[pl].ero -= x * 3;
+            Char[pl].arm -= 1;
+            Move(pl, x);
+            if (pl == 0) { message("Beülsz a katapultba, ami előrerepít, bár kissé rázós a landolás.") } else {
+                message("Battle Beetle beül a hájas valagával a katapultba és megpróbálja kilőni magát.");
+            }
+            PrintVals();
+            CheckDeath();
+            break;
+
+        case "meglepi":
+            var x = parseInt(1 + 6 * Math.random());
+            switch (x) {
+                case 1:
+                    var pl2 = (pl == 0) ? 1 : 0;
+                    Move(pl, Char[pl2].pos - Char[pl].pos);
+                    break;
+
+                case 2:
+                    piaUp = parseInt(7 * Math.random());
+                    kocUp = parseInt(7 * Math.random());
+                    bomUp = parseInt(7 * Math.random());
+                    altUp = parseInt(7 * Math.random());
+                    message("Zavar adódott a spéci tárgyakban");
+                    updateVals();
+                    break;
+
+                case 3:
+                    Char[pl].arm += parseInt(1 + 5 * Math.random());
+                    if (pl == 0) { message("Találsz egy deszkát, ami jó lesz védekezésre.") } else {
+                        message("Battle Beetle befeszíti az izmait, amitől nő a páncélzata.");
+                    }
+                    PrintVals();
+                    break;
+
+                case 4:
+                    Char[pl].arm -= parseInt(1 + 5 * Math.random());
+                    if (pl == 0) { message("Rádömlik valami sav, ami tönkreteszi a felszerelésed.") } else {
+                        message("Battle Beetle elernyeszti az izmait. Csökken a páncélzata.");
+                    }
+                    PrintVals();
+                    CheckDeath();
+                    break;
+
+                case 5:
+                    Char[pl].seb += parseInt(1 + 5 * Math.random());
+                    if (pl == 0) { message("Találsz egy Rambo-kést, ami jó lesz fegyvernek.") } else {
+                        message("Battle Beetle edzi a csápjait. Nő a sebzése.");
+                    }
+                    PrintVals();
+                    break;
+
+                case 6:
+                    Char[pl].seb -= parseInt(1 + 5 * Math.random());
+                    if (pl == 0) { message("Megsérül a fegyvered (ha volt).") } else {
+                        message("Battle Beetle lereszelte a körmeit. Csökken a sebzése.");
+                    }
+                    PrintVals();
+                    CheckDeath();
+                    break;
+                default:
+                    break;
+            }
+            break;
+
+        case "bb":
+            if (pl == 0) {
+            document.body.style = "filter: opacity(0) brightness(0) blur(50px); transition: all 5s"
+            setTimeout(function () {
+            document.body.innerHTML = `<h1>TE NYERTÉL!</h1><br>
+            <p>A távolból hallod Battle Beetle ordítását, amikor észrevette, hogy megtaláltad a Brutal Ballt, de már túl késő...</p>
+            <p>A konzolhoz ugrasz és első körben Battle Beetle-t törlöd a programból. Hirtelen örökre elnémul az ordítása. Ezután gyorsan átírod a programot és újraindítod. A jószág megnyugtatóan felbúg és érzed, ahogy szétárad az energiája. A hónod alá csapod és elindulsz vissza a városba.</p>
+            <p>Megkönnyebbülve látod, hogy a szokott emberek és épületek fogadnak. Még a bagoly sem szomorú többé.</p>
+            <p>Megköszönöd:<p>
+            <ul>
+            <li>Utry Máténak, hogy hasznos észrevételeivel jobbá tette ezt a világot,</li>          
+            <li>Panninak, Boginak és Marcinak, hogy folyamatosan elkísértek utadon és rámutattak bizonyos hibákra,</li>
+            <li>a ZapSplat-nek a fülbemászó zenéket és</li>
+            <li>Utri Gergelynek az egész világ megalkotását és kódolását.</li>
+            </ul>`
+            document.body.style = "filter: opacity(1) brightness(1) blur(0); transition: all 1s"
+        }, 5001)} else {
+            document.body.style = "filter: opacity(0) brightness(0) blur(50px); transition: all 5s"
+            setTimeout(function () {
+            document.body.innerHTML = "<h1>BATTLE BEETLE NYERT!</h1><br><p>Battle Beetle elérte a Brutal Ballt és kárörvendő kacajjal közli, hogy véglegesíti a programot. Olyan bazibrutál marad a világ, amilyenné ő tette. Csak Téged töröl ki belőle!</p><p>Nem tehetsz ellene semmit. Hacsak nem aktiválod gyorsan a legerősebb varázslatot az F5 billentyűvel!";
+            document.body.style = "filter: opacity(1) brightness(1) blur(0); transition: all 1s"
+        }, 5001)
+        };
+        default:
+            break;
     }
 }
 
 function CheckDeath() {
-    return;
+    for (let i = 0; i < 2; i++) {
+        if (Char[i].arm < 1) { Char[i].arm = 0; PrintVals };
+        if (Char[i].seb < 1) { Char[i].seb = 0; PrintVals };
+        if (Char[i].ugy < 1) { Char[i].ugy = 0; PrintVals };
+        if (Char[i].esz < 1) { Char[i].esz = 0; PrintVals };
+        if (Char[i].ero < 1) { Char[i].ero = 0; PrintVals };
+    }
+    if (Char[0].ero == 0) {
+        document.body.style = "filter: opacity(0) brightness(0) blur(50px); transition: all 5s"
+        setTimeout(function () {
+            document.body.innerHTML = "<h1>MEGHALTÁL!</h1><br><p>Minden igyekezeted ellenére nem sikerült helyreállítanod a világ rendjét.</p><p>De még mindig maradt egy reménysugár: megtudod, hogy mi, ha lenyomod az F5-öt.";
+            document.body.style = "filter: opacity(1) brightness(1) blur(0); transition: all 1s"
+        }, 5001)
+    };
+    if (Char[1].ero == 0) {
+        document.body.style = "filter: opacity(0) brightness(0) blur(50px); transition: all 5s"
+        setTimeout(function () {
+            document.body.innerHTML = `<h1>MEGHALT BATTLE BEETLE!</h1><br>
+            <p>Vidám kurjantással arréb rúgod a hulláját és fütyörészve elsétálsz a Brutal Ballhoz...</p>
+            <p>Amikor megtalálod, gyorsan átírod a konzolon a programot, aztán újraindítod. A jószág megnyugtatóan felbúg és érzed, ahogy szétárad az energiája. A hónod alá csapod és elindulsz vissza a városba.</p>
+            <p>Megkönnyebbülve látod, hogy a szokott emberek és épületek fogadnak. Még a bagoly sem szomorú többé.</p>
+            <p>Megköszönöd:<p>
+            <ul>
+            <li>Utry Máténak, hogy hasznos észrevételeivel jobbá tette ezt a világot,</li>          
+            <li>Panninak, Boginak és Marcinak, hogy folyamatosan elkísértek utadon és rámutattak bizonyos hibákra,</li>
+            <li>a ZapSplat-nek a fülbemászó zenéket és</li>
+            <li>Utri Gergelynek az egész világ megalkotását és kódolását.</li>
+            </ul>`
+            document.body.style = "filter: opacity(1) brightness(1) blur(0); transition: all 1s"
+        }, 5001)
+    };
 }
+
+
+

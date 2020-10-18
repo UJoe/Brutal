@@ -24,8 +24,8 @@ h1 {text-align: center;
 #magno {
     position: fixed;
     top: 80px;
-    right: 55px;
-    transform: scale(0.9);
+    right: 45px;
+    transform: scale(0.8);
 }
 
 #board {
@@ -74,6 +74,25 @@ h1 {text-align: center;
     transform: scale(1.2);
 }
 
+.kocPic {
+    position: fixed;
+    display: inline-block;
+    bottom: 70px;
+    height: 50px;
+    width: 50px;
+    margin: 50px 5px 5px 50px;
+    border-radius: 15px;
+}
+
+.kocPic:hover {
+    border: solid 5px red;
+    margin: 0px 0px 0px 45px;
+}
+
+.kocPic:active {
+    transform: scale(1.2);
+}
+
 .UpNo {
     position: relative;
     display: inline-block;
@@ -90,8 +109,14 @@ h1 {text-align: center;
 
 #values {
     position: absolute;
-    left: 42%;
+    left: 33%;
     top: 71%;
+}
+
+#other {
+    position: absolute;
+    bottom: 100px;
+    left: 100px;
 }
 
 #dice-btn {
@@ -123,7 +148,7 @@ h1 {text-align: center;
 }
 
 td, th {
-    width: 500px;
+    width: 585px;
     padding: 5px;
     font-size: large;
 }
@@ -140,18 +165,19 @@ th {
    width: 0px;
    text-align: left;
    position: absolute;
+   transition: all 1s;
 }
 
 .CharVal {
     color: blue;
     background-color: lime;
-    left: 12%;
+    left: 9%;
 }
 
 .BBVal {
     color: white;
     background-color: purple;
-    left: 62%;
+    left: 59%;
 }
 
 #message {

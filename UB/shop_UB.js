@@ -51,33 +51,33 @@ var UgyRuhak = [
         num: 0,
         id: "csúzli",
         status: 1,
-        desc: "ROSSZCSONTOK CSÚZLIJA&#10;+4 Ügyesség&#10;+4 Sebzés",
+        desc: "ROSSZCSONTOK CSÚZLIJA&#10;+4 Ügyesség&#10;+5 Sebzés",
         price: 10,
-        change: [0, 4, 0, 0, 4]
+        change: [0, 4, 0, 0, 5]
     },
     {
         num: 1,
         id: "kard",
         status: 1,
-        desc: "NEMES LOVAGOK KARDJA&#10;+8 Ügyesség&#10;+6 Páncél&#10;+10 Sebzés",
+        desc: "NEMES LOVAGOK KARDJA&#10;+8 Ügyesség&#10;+6 Páncél&#10;+12 Sebzés",
         price: 40,
-        change: [0, 8, 0, 6, 10]
+        change: [0, 8, 0, 6, 12]
     },
     {
         num: 2,
         id: "pisztoly",
         status: 1,
-        desc: "GENGSZTEREK JÁTÉKPISZTOLYA&#10;+15 Ügyesség&#10;+20 Sebzés&#10;-2 Ész",
+        desc: "GENGSZTEREK JÁTÉKPISZTOLYA&#10;+15 Ügyesség&#10;+25 Sebzés&#10;-3 Ész",
         price: 70,
-        change: [0, 15, -2, 0, 20]
+        change: [0, 15, -3, 0, 25]
     },
     {
         num: 3,
         id: "lézerkard",
         status: 1,
-        desc: "LÉZERKARD&#10;+15 Erő&#10;+5 Páncél&#10;+20 Ügyesség&#10;+6 Ész&#10;+20 Sebzés",
+        desc: "LÉZERKARD&#10;+15 Erő&#10;+5 Páncél&#10;+20 Ügyesség&#10;+6 Ész&#10;+24 Sebzés",
         price: 100,
-        change: [15, 20, 6, 5, 20]
+        change: [15, 20, 6, 5, 24]
     }];
 
 var EszRuhak = [
@@ -87,7 +87,6 @@ var EszRuhak = [
         status: 1,
         desc: "DUGIPIÁS FLASKA&#10;Jobb, mint a dopping.&#10;Frissülés: 3 kör",
         price: 30,
-        refresh: 4
     },
     {
         num: 1,
@@ -95,7 +94,6 @@ var EszRuhak = [
         status: 1,
         desc: "ENGEDELMES KOCKA&#10;Meghatározhatod,&#10;mennyit dobsz.&#10;Frissülés: 2 kör",
         price: 40,
-        refresh: 2
     },
     {
         num: 2,
@@ -103,19 +101,14 @@ var EszRuhak = [
         status: 1,
         desc: "HUNCUT KIS BOMBA&#10;Megszivatod BB-t,&#10;ha melletted áll.&#10;Frissülés: 1 kör",
         price: 60,
-        refresh: 1
     },
     {
         num: 3,
         id: "altatópuska",
         status: 1,
-        desc: "ALTATÓPUSKA&#10;Egy időre kivonja a&#10;forgalomból BB-t&#10;Frissülés: 3 kör",
+        desc: "ALTATÓPUSKA&#10;Egy időre kivonja a&#10;forgalomból BB-t&#10;Frissülés: 4 kör",
         price: 90,
-        refresh: 3
     }];
-
-
-
 
 PrintObjects();
 PrintVals();
