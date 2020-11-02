@@ -332,7 +332,7 @@ function Track(pl) {
             break;
 
         case "fa":
-            if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (20 + Math.random() * 30)) {
+            if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (30 + Math.random() * 40)) {
                 Char[pl].ugy += 5;
                 if (pl == 0) { message("Rád támadt egy gonosz fa, de pozdorját csináltál belőle.") } else {
                     message("Battle Beetle-re támadt egy fa, de ellátta a baját.");
@@ -350,7 +350,7 @@ function Track(pl) {
             break;
 
         case "manti":
-            if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (50 + Math.random() * 60)) {
+            if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (60 + Math.random() * 70)) {
                 Char[pl].ugy += 10;
                 if (pl == 0) { message("Rád támadt egy manticore, de szőnyeget csináltál belőle.") } else {
                     message("Battle Beetle-re támadt egy manticore, de sajnos BB nyert.");
@@ -368,7 +368,7 @@ function Track(pl) {
             break;
 
         case "bika":
-            if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (80 + Math.random() * 90)) {
+            if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (90 + Math.random() * 100)) {
                 Char[pl].ugy += 15;
                 if (pl == 0) { message("Rád támadt egy böszme szörny, de sikerült móresre tanítanod.") } else {
                     message("Battle Beetle-re támadt egy kedves szörny, mire ő hidegvérrel lemészárolta.");
@@ -414,6 +414,7 @@ function Track(pl) {
                 case 1:
                     var pl2 = (pl == 0) ? 1 : 0;
                     Move(pl, Char[pl2].pos - Char[pl].pos);
+                    message("TELEPORT ATTACK!");
                     break;
 
                 case 2:
@@ -465,7 +466,7 @@ function Track(pl) {
 
         case "bb":
             if (pl == 0) {
-            document.body.style = "filter: opacity(0) brightness(0) blur(50px); transition: all 5s"
+            document.body.style = "filter: opacity(0) brightness(0.1) blur(20px); transition: all 5s"
             setTimeout(function () {
             document.body.innerHTML = `<h1>TE NYERTÉL!</h1><br>
             <p>A távolból hallod Battle Beetle ordítását, amikor észrevette, hogy megtaláltad a Brutal Ballt, de már túl késő...</p>
@@ -480,7 +481,7 @@ function Track(pl) {
             </ul>`
             document.body.style = "filter: opacity(1) brightness(1) blur(0); transition: all 1s"
         }, 5001)} else {
-            document.body.style = "filter: opacity(0) brightness(0) blur(50px); transition: all 5s"
+            document.body.style = "filter: opacity(0) brightness(0.1) blur(20px); transition: all 5s"
             setTimeout(function () {
             document.body.innerHTML = "<h1>BATTLE BEETLE NYERT!</h1><br><p>Battle Beetle elérte a Brutal Ballt és kárörvendő kacajjal közli, hogy véglegesíti a programot. Olyan bazibrutál marad a világ, amilyenné ő tette. Csak Téged töröl ki belőle!</p><p>Nem tehetsz ellene semmit. Hacsak nem aktiválod gyorsan a legerősebb varázslatot az F5 billentyűvel!";
             document.body.style = "filter: opacity(1) brightness(1) blur(0); transition: all 1s"
@@ -500,14 +501,14 @@ function CheckDeath() {
         if (Char[i].ero < 1) { Char[i].ero = 0; PrintVals };
     }
     if (Char[0].ero == 0) {
-        document.body.style = "filter: opacity(0) brightness(0) blur(50px); transition: all 5s"
+        document.body.style = "filter: opacity(0) brightness(0.1) blur(20px); transition: all 5s"
         setTimeout(function () {
             document.body.innerHTML = "<h1>MEGHALTÁL!</h1><br><p>Minden igyekezeted ellenére nem sikerült helyreállítanod a világ rendjét.</p><p>De még mindig maradt egy reménysugár: megtudod, hogy mi, ha lenyomod az F5-öt.";
             document.body.style = "filter: opacity(1) brightness(1) blur(0); transition: all 1s"
         }, 5001)
     };
     if (Char[1].ero == 0) {
-        document.body.style = "filter: opacity(0) brightness(0) blur(50px); transition: all 5s"
+        document.body.style = "filter: opacity(0) brightness(0.1) blur(20px); transition: all 5s"
         setTimeout(function () {
             document.body.innerHTML = `<h1>MEGHALT BATTLE BEETLE!</h1><br>
             <p>Vidám kurjantással arréb rúgod a hulláját és fütyörészve elsétálsz a Brutal Ballhoz...</p>
@@ -524,6 +525,3 @@ function CheckDeath() {
         }, 5001)
     };
 }
-
-
-

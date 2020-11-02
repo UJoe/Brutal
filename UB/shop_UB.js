@@ -93,13 +93,13 @@ var EszRuhak = [
         id: "kocka",
         status: 1,
         desc: "ENGEDELMES KOCKA&#10;Meghatározhatod,&#10;mennyit dobsz.&#10;Frissülés: 2 kör",
-        price: 40,
+        price: 50,
     },
     {
         num: 2,
         id: "bomba",
         status: 1,
-        desc: "HUNCUT KIS BOMBA&#10;Megszivatod BB-t,&#10;ha melletted áll.&#10;Frissülés: 1 kör",
+        desc: "HUNCUT KIS BOMBA&#10;Megszivatod BB-t,&#10;ha közel áll.&#10;Frissülés: 1 kör",
         price: 60,
     },
     {
@@ -107,7 +107,7 @@ var EszRuhak = [
         id: "altatópuska",
         status: 1,
         desc: "ALTATÓPUSKA&#10;Egy időre kivonja a&#10;forgalomból BB-t&#10;Frissülés: 4 kör",
-        price: 90,
+        price: 80,
     }];
 
 PrintObjects();
