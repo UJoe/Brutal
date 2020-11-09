@@ -311,6 +311,7 @@ function PrintValues() {
 function CheckEnd() {
     if (Character[0] < 1) { document.body.innerHTML = "<h1>MEGHALTÁL!</h1><br><p class='Order'>Nyomd meg az F5-öt az időgép aktiválásához!</p>" };
     if (Character[1] < 1 || Character[2] < 1) { document.body.innerHTML = "<h1>Annyira gyökér lettél, hogy nem érdemes tovább folytatni!</h1><br><p class='Order'>Nyomd meg az F5-öt az időgép aktiválásához!</p>" };
+    document.body.setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px);");
 }
 
 //Spéci szobák

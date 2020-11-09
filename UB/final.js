@@ -154,8 +154,8 @@ function PrintVals() {
     <td>Sebzés: <span class='BBVal' style="width: ${15 + Char[1].seb * 1.5}px;">${Char[1].seb}</span></td>
     </tr>
     </table>`;
-    //document.getElementsByClassName("CharVal").style.transition = "all 2s";
-    //document.getElementsByClassName("BBVal").style.transition = "all 2s";
+    //document.getElementsByClassName("CharVal").style.transition = "1s";
+    //document.getElementsByClassName("BBVal").style.transition = "1s";
 }
 
 function message(text) {

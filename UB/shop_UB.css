@@ -8,6 +8,7 @@ body {
     background-image: radial-gradient(circle,white, lightblue, cyan, yellow);
     color: darkblue;
     font-size: 105%;
+    outline: none;
 }
 
 #magno {

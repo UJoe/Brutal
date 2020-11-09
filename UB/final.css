@@ -91,7 +91,13 @@ h1 {text-align: center;
 
 .kocPic:active {
     transform: scale(1.2);
+    outline: none;
 }
+
+.kocPic:focus {
+    outline: none;
+}
+
 
 .UpNo {
     position: relative;
