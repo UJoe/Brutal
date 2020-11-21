@@ -48,12 +48,6 @@ h1 {text-align: center;
     border-radius: 50%;
 }
 
-#CharP:active, #BBP:active {
-    filter: brightness(1.5);
-    transform: scale(2);
-    transition: all 1s;
-}
-
 .ObjPic {
     position: relative;
     display: inline-block;
@@ -171,7 +165,7 @@ th {
    width: 0px;
    text-align: left;
    position: absolute;
-   transition: all 1.5s;
+   transition: all 1.2s ease-out;
 }
 
 .CharVal {
@@ -193,7 +187,7 @@ span {
 #message {
     position: absolute;
     left: 15%;
-    top: 41%;
+    top: 390px;
     opacity: 1;
     background-image: radial-gradient(circle, rgba(192, 242, 227, 0.5), rgba(255, 255, 0, 0));
     color:cyan;

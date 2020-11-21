@@ -286,26 +286,22 @@ function PrintValues() {
     var nme = document.getElementById('enemy');
     strength.innerHTML = (Character[0]>0) ? Character[0] : "X";
     strength.style.width = (10 + Character[0] * 3) + "px";
-    strength.style.transition = "all 1s";
     if (Character[0] < 20) { strength.style.backgroundColor = "red"; mate(0); }
     else if (Character[0] > 99) { strength.style.backgroundColor = "white" }
     else { strength.style.backgroundColor = "lime" };
     skill.innerHTML = (Character[1]>0) ? Character[1] : "X"; 
     skill.style.width = (10 + Character[1] * 3) + "px";
-    skill.style.transition = "all 1s";
     if (Character[1] < 20) { skill.style.backgroundColor = "red"; mate(1); }
     else if (Character[1] > 99) { skill.style.backgroundColor = "white" }
     else { skill.style.backgroundColor = "lime" };
     iq.innerHTML = (Character[2]>0) ? Character[2] : "X";
     iq.style.width = (10 + Character[2] * 3) + "px";
-    iq.style.transition = "all 1s";
     if (Character[2] < 20) { iq.style.backgroundColor = "red"; mate(2); }
     else if (Character[2] > 99) { iq.style.backgroundColor = "white" }
     else { iq.style.backgroundColor = "lime" };
     if (Steps % 10 == 0) {
         nme.innerHTML = (EnemyVal>0) ? EnemyVal : "X";
         nme.style.width = (10 + EnemyVal * 3) + "px";
-        nme.style.transition = "all 1s";
         if (EnemyVal < 20) { enemy.style.backgroundColor = "black"; }
         else { nme.style.backgroundColor = "purple"; }
     }

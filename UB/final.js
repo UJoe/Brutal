@@ -134,28 +134,26 @@ function PrintVals() {
     <th>BATTLE BEETLE</th>
     </tr>
     <tr>
-    <td>Erő: <span class='CharVal' style="width: ${15 + Char[0].ero * 1.5}px;">${Char[0].ero}</span></td>
-    <td>Erő: <span class='BBVal' style="width: ${15 + Char[1].ero * 1.5}px;">${Char[1].ero}</span></td>
+    <td>Erő: <span class='CharVal' id='val_0_1' style="width: ${15 + Char[0].ero * 1.5}px;">${Char[0].ero}</span></td>
+    <td>Erő: <span class='BBVal' id='val_1_1' style="width: ${15 + Char[1].ero * 1.5}px;">${Char[1].ero}</span></td>
     </tr>
     <tr>
-    <td>Ügyesség: <span class='CharVal' style="width: ${15 + Char[0].ugy * 1.5}px;">${Char[0].ugy}</span></td>
-    <td>Ügyesség: <span class='BBVal' style="width: ${15 + Char[1].ugy * 1.5}px;">${Char[1].ugy}</span></td>
+    <td>Ügyesség: <span class='CharVal' id='val_0_2' style="width: ${15 + Char[0].ugy * 1.5}px;">${Char[0].ugy}</span></td>
+    <td>Ügyesség: <span class='BBVal' id='val_1_2' style="width: ${15 + Char[1].ugy * 1.5}px;">${Char[1].ugy}</span></td>
     </tr>
     <tr>
-    <td>Ész: <span class='CharVal' style="width: ${15 + Char[0].esz * 1.5}px;">${Char[0].esz}</span></td>
-    <td>Ész: <span class='BBVal' style="width: ${15 + Char[1].esz * 1.5}px;">${Char[1].esz}</span></td>
+    <td>Ész: <span class='CharVal' id='val_0_3' style="width: ${15 + Char[0].esz * 1.5}px;">${Char[0].esz}</span></td>
+    <td>Ész: <span class='BBVal' id='val_1_3' style="width: ${15 + Char[1].esz * 1.5}px;">${Char[1].esz}</span></td>
     </tr>
     <tr>
-    <td>Páncél: <span class='CharVal' style="width: ${15 + Char[0].arm * 1.5}px;">${Char[0].arm}</span></td>
-    <td>Páncél: <span class='BBVal' style="width: ${15 + Char[1].arm * 1.5}px;">${Char[1].arm}</span></td>
+    <td>Páncél: <span class='CharVal' id='val_0_4' style="width: ${15 + Char[0].arm * 1.5}px;">${Char[0].arm}</span></td>
+    <td>Páncél: <span class='BBVal' id='val_1_4' style="width: ${15 + Char[1].arm * 1.5}px;">${Char[1].arm}</span></td>
     </tr>
     <tr>
-    <td>Sebzés: <span class='CharVal' style="width: ${15 + Char[0].seb * 1.5}px;">${Char[0].seb}</span></td>
-    <td>Sebzés: <span class='BBVal' style="width: ${15 + Char[1].seb * 1.5}px;">${Char[1].seb}</span></td>
+    <td>Sebzés: <span class='CharVal' id='val_0_5' style="width: ${15 + Char[0].seb * 1.5}px;">${Char[0].seb}</span></td>
+    <td>Sebzés: <span class='BBVal' id='val_1_5' style="width: ${15 + Char[1].seb * 1.5}px;">${Char[1].seb}</span></td>
     </tr>
     </table>`;
-    //document.getElementsByClassName("CharVal").style.transition = "all 1.5s";
-    //document.getElementsByClassName("BBVal").style.transition = "all 1.5s";
 }
 
 function message(text) {
@@ -208,17 +206,19 @@ function UsePálesz() {
         case 0:
             message("Kétszeresére dagadnak az izmaid, nyersz " + x + " Erőt!");
             Char[0].ero += x;
+            ChangeVal(0, 1, Char[0].ero);
             break;
         case 1:
             message("Úgy pattogsz, mint egy ninja, nyersz " + x + " Ügyességet!");
             Char[0].ugy += x;
+            ChangeVal(0, 2, Char[0].ugy);
             break;
         case 2:
             message("Kitisztul az elméd, nyersz " + x + " Észt!");
             Char[0].esz += x;
+            ChangeVal(0, 3, Char[0].esz);
             break;
     }
-    PrintVals();
     piaUp = 4;
     updateVals();
 }
@@ -249,17 +249,19 @@ function UseBomba() {
         case 0:
             message("A bomba Battle Beetle mellkasának csapódik. Veszít " + x + " Erőt!");
             Char[1].ero -= x;
+            ChangeVal(1, 1, Char[1].ero);
             break;
         case 1:
             message("A bomba Battle Beetle egyik lábát találja el. Veszít " + x + " Ügyességet!");
             Char[1].ugy -= x;
+            ChangeVal(1, 2, Char[1].ugy);
             break;
         case 2:
             message("A bomba Battle Beetle fejénél robban. Veszít " + x + " Észt!");
             Char[1].esz -= x;
+            ChangeVal(1, esz, Char[1].esz);
             break;
     }
-    PrintVals();
     CheckDeath();
     bomUp = 2;
     updateVals();
@@ -307,12 +309,16 @@ function CheckFight(pl1, pl2) {
                     Char[pl2].esz -= parseInt(y / 10);
                     Char[pl2].arm -= 1;
                     Char[pl2].seb -= 1;
-                    PrintVals();
+                    ChangeVal(pl2, 1, Char[pl2].ero);
+                    ChangeVal(pl2, 2, Char[pl2].ugy);
+                    ChangeVal(pl2, 3, Char[pl2].esz);
+                    ChangeVal(pl2, 4, Char[pl2].arm);
+                    ChangeVal(pl2, 5, Char[pl2].seb);
                     CheckDeath();
                 } else {
                     message("Sikeres támadás!");
                     Char[pl2].ero -= y;
-                    PrintVals();
+                    ChangeVal(pl2, 1, Char[pl2].ero);
                     CheckDeath();
                 }
             } else {
@@ -332,12 +338,13 @@ function Track(pl) {
             if (pl == 0) { message("Jót eszel a gyümölcsből, kapsz " + x + " Erőt.") } else {
                 message("Battle Beetle megtömi a pocakját. Kap " + x + " Erőt.");
             }
-            PrintVals();
+            ChangeVal(pl, 1, Char[pl].ero);
             break;
 
         case "fa":
             if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (30 + Math.random() * 40)) {
                 Char[pl].ugy += 5;
+                ChangeVal(pl, 2, Char[pl].ugy);
                 if (pl == 0) { message("Rád támadt egy gonosz fa, de pozdorját csináltál belőle.") } else {
                     message("Battle Beetle-re támadt egy fa, de ellátta a baját.");
                 }
@@ -345,17 +352,18 @@ function Track(pl) {
                 var x = parseInt(10 + Math.random() * 10 - Char[pl].arm);
                 if (x < 1) { x = 1 };
                 Char[pl].ero -= x;
+                ChangeVal(pl, 1, Char[pl].ero)
                 if (pl == 0) { message("Rád támadt egy gonosz fa! Vesztesz " + x + " Erőt!") } else {
                     message("Végre Battle Beetle-re támadt az egyik fa! Veszít " + x + " Erőt.");
                 }
                 CheckDeath();
             }
-            PrintVals();
             break;
 
         case "manti":
             if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (60 + Math.random() * 70)) {
                 Char[pl].ugy += 10;
+                ChangeVal(pl, 2, Char[pl].ugy);
                 if (pl == 0) { message("Rád támadt egy manticore, de szőnyeget csináltál belőle.") } else {
                     message("Battle Beetle-re támadt egy manticore, de sajnos BB nyert.");
                 }
@@ -363,17 +371,18 @@ function Track(pl) {
                 var x = parseInt(20 + Math.random() * 20 - Char[pl].arm);
                 if (x < 1) { x = 2 };
                 Char[pl].ero -= x;
+                ChangeVal(pl, 1, Char[pl].ero);
                 if (pl == 0) { message("Egy alattomos manticore " + x + " Erőt sebzett rajtad!") } else {
                     message("Egy jó fej manticore ellátta Battle Beetle baját.");
                 }
                 CheckDeath();
             }
-            PrintVals();
             break;
 
         case "bika":
             if ((Char[pl].ugy + Char[pl].ero / 5 + Char[pl].esz / 10) > (90 + Math.random() * 100)) {
                 Char[pl].ugy += 15;
+                ChangeVal(pl, 2, Char[pl].ugy);
                 if (pl == 0) { message("Rád támadt egy böszme szörny, de sikerült móresre tanítanod.") } else {
                     message("Battle Beetle-re támadt egy kedves szörny, mire ő hidegvérrel lemészárolta.");
                 }
@@ -381,34 +390,35 @@ function Track(pl) {
                 var x = parseInt(30 + Math.random() * 30 - Char[pl].arm);
                 if (x < 1) { x = 3 };
                 Char[pl].ero -= x;
+                ChangeVal(pl, 1, Char[pl].ero);
                 if (pl == 0) { message("Karjába zárt egy vérengző nyörny. Vesztesz " + x + " Erőt!") } else {
                     message("Másnak is elege lett Battle Beetle-ből és agyba-főbe verte.");
                 }
                 CheckDeath();
             }
-            PrintVals();
             break;
 
         case "boxer":
             var x = parseInt(1 + pl + Math.random() * 4);
             Char[pl].ero -= x * 10;
+            ChangeVal(pl, 1, Char[pl].ero);
             Move(pl, -x);
             if (pl == 0) { message("Hirtelen előugrik egy erdei boxoló és egy irtózatosat bemos Neked.") } else {
                 message("Egy erdei boxoló iszonyatosan hókon nyomja Battle Beetle-t.");
             }
-            PrintVals();
             CheckDeath();
             break;
 
         case "katapult":
             var x = parseInt(1 - pl + Math.random() * 3);
             Char[pl].ero -= x * 3;
+            ChangeVal(pl, 1, Char[pl].ero);
             Char[pl].arm -= 1;
+            ChangeVal(pl, 4, Char[pl].arm);
             Move(pl, x);
             if (pl == 0) { message("Beülsz a katapultba, ami előrerepít, bár kissé rázós a landolás.") } else {
                 message("Battle Beetle beül a hájas valagával a katapultba és megpróbálja kilőni magát.");
             }
-            PrintVals();
             CheckDeath();
             break;
 
@@ -432,35 +442,35 @@ function Track(pl) {
 
                 case 3:
                     Char[pl].arm += parseInt(1 + 5 * Math.random());
+                    ChangeVal(pl, 4, Char[pl].arm);
                     if (pl == 0) { message("Találsz egy deszkát, ami jó lesz védekezésre.") } else {
                         message("Battle Beetle befeszíti az izmait, amitől nő a páncélzata.");
                     }
-                    PrintVals();
                     break;
 
                 case 4:
                     Char[pl].arm -= parseInt(1 + 5 * Math.random());
+                    ChangeVal(pl, 4, Char[pl].arm);
                     if (pl == 0) { message("Rádömlik valami sav, ami tönkreteszi a felszerelésed.") } else {
                         message("Battle Beetle elernyeszti az izmait. Csökken a páncélzata.");
                     }
-                    PrintVals();
                     CheckDeath();
                     break;
 
                 case 5:
                     Char[pl].seb += parseInt(1 + 5 * Math.random());
+                    ChangeVal(pl, 5, Char[pl].seb);
                     if (pl == 0) { message("Találsz egy Rambo-kést, ami jó lesz fegyvernek.") } else {
                         message("Battle Beetle edzi a csápjait. Nő a sebzése.");
                     }
-                    PrintVals();
                     break;
 
                 case 6:
                     Char[pl].seb -= parseInt(1 + 5 * Math.random());
+                    ChangeVal(pl, 5, Char[pl].seb);
                     if (pl == 0) { message("Megsérül a fegyvered (ha volt).") } else {
                         message("Battle Beetle lereszelte a körmeit. Csökken a sebzése.");
                     }
-                    PrintVals();
                     CheckDeath();
                     break;
                 default:
@@ -498,11 +508,11 @@ function Track(pl) {
 
 function CheckDeath() {
     for (let i = 0; i < 2; i++) {
-        if (Char[i].arm < 1) { Char[i].arm = 0; PrintVals };
-        if (Char[i].seb < 1) { Char[i].seb = 0; PrintVals };
-        if (Char[i].ugy < 1) { Char[i].ugy = 0; PrintVals };
-        if (Char[i].esz < 1) { Char[i].esz = 0; PrintVals };
-        if (Char[i].ero < 1) { Char[i].ero = 0; PrintVals };
+        if (Char[i].arm < 1) { Char[i].arm = 0; ChangeVal(i, 4, Char[i].arm); };
+        if (Char[i].seb < 1) { Char[i].seb = 0; ChangeVal(i, 5, Char[i].seb); };
+        if (Char[i].ugy < 1) { Char[i].ugy = 0; ChangeVal(i, 2, Char[i].ugy); };
+        if (Char[i].esz < 1) { Char[i].esz = 0; ChangeVal(i, 3, Char[i].esz); };
+        if (Char[i].ero < 1) { Char[i].ero = 0; ChangeVal(i, 1, Char[i].ero); };
     }
     if (Char[0].ero == 0) {
         document.body.style = "filter: opacity(0) brightness(0.1) blur(20px); transition: all 5s"
@@ -528,4 +538,9 @@ function CheckDeath() {
             document.body.style = "filter: opacity(1) brightness(1) blur(0); transition: all 1s"
         }, 5001)
     };
+}
+
+function ChangeVal(x, y, z) {
+    document.getElementById("val_"+x+"_"+y).innerHTML= z;
+    document.getElementById("val_"+x+"_"+y).style= "width: "+(15+z*1.5)+"px";
 }
