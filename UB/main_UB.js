@@ -241,6 +241,9 @@ function EscapeBtn() {
 //Új szoba
 function NewRoom() {
     Steps += 1;
+    if (Steps ==1) {
+        document.getElementById("zenegep").style="bottom: 0; right: 0; transform: scale(1)";
+    }
     if (Steps == 40) {
         document.getElementById("container").innerHTML = "<h1>MEGTALÁLTAD BATTLE BEETLE-T!<img src='./img/bbeetle.jpg' alt='Battle Beetle' style='display: block; margin-top: 20px; margin-left: auto; margin-right: auto; height: 600px;'><button onclick='Finale()'>Jöhet a végső harc!</button></h1>";
         document.getElementById("container").setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px); transition: filter 1.5s");

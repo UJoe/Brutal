@@ -155,6 +155,10 @@ button:focus {
 
 #zenegep {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 755px;
+    right: 550px;
+    transform: scale(0.7);
+    z-index: 1;
+    outline: none;
+    transition: all 1.5s;
 }

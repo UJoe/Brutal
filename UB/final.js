@@ -82,7 +82,7 @@ function initboard() {
     document.getElementById("mezo12").style.left = 60 + 11 * 150 + "px";
     document.getElementById("mezo12").style.top = "340px";
     for (let i = 13; i < 25; i++) {
-        document.getElementById("mezo" + i).style.right = 64 + (i - 13) * 150 + "px";
+        document.getElementById("mezo" + i).style.left = 60 + (Math.abs(i - 24)) * 150 + "px";
         document.getElementById("mezo" + i).style.top = "490px";
     }
     //bábuk lerakása
@@ -118,13 +118,13 @@ function updateVals() {
     };
     document.getElementById("updates").innerHTML = updateDiv;
     if (pia === true && piaUp == 0) { document.getElementById("piaUV").innerHTML = "&#10004;"; document.getElementById("piaP").style = "box-shadow: 0px 0px 20px #FD07FD"; document.getElementById("piaP").style.opacity = 1 };
-    if (pia === true && piaUp > 0) { document.getElementById("piaP").style = "box-shadow: 0px 0px"; document.getElementById("piaP").style.opacity = 0.6 };
+    if (pia === true && piaUp > 0) { document.getElementById("piaP").style = "box-shadow: 0px 0px"; document.getElementById("piaP").style.opacity = 0.5 };
     if (koc === true && kocUp == 0) { document.getElementById("kocUV").innerHTML = "&#10004;"; document.getElementById("kocP").style = "box-shadow: 0px 0px 20px #FD07FD; "; document.getElementById("kocP").style.opacity = 1 };
-    if (koc === true && kocUp > 0) { document.getElementById("kocP").style = "box-shadow: 0px 0px"; document.getElementById("kocP").style.opacity = 0.6 };
+    if (koc === true && kocUp > 0) { document.getElementById("kocP").style = "box-shadow: 0px 0px"; document.getElementById("kocP").style.opacity = 0.5 };
     if (bom === true && bomUp == 0) { document.getElementById("bomUV").innerHTML = "&#10004;"; document.getElementById("bomP").style = "box-shadow: 0px 0px 20px #FD07FD"; document.getElementById("bomP").style.opacity = 1 };
-    if (bom === true && bomUp > 0) { document.getElementById("bomP").style = "box-shadow: 0px 0px"; document.getElementById("bomP").style.opacity = 0.6 };
+    if (bom === true && bomUp > 0) { document.getElementById("bomP").style = "box-shadow: 0px 0px"; document.getElementById("bomP").style.opacity = 0.5 };
     if (alt === true && altUp == 0) { document.getElementById("altUV").innerHTML = "&#10004;"; document.getElementById("altP").style = "box-shadow: 0px 0px 20px #FD07FD"; document.getElementById("altP").style.opacity = 1 };
-    if (alt === true && altUp > 0) { document.getElementById("altP").style = "box-shadow: 0px 0px"; document.getElementById("altP").style.opacity = 0.6 };
+    if (alt === true && altUp > 0) { document.getElementById("altP").style = "box-shadow: 0px 0px"; document.getElementById("altP").style.opacity = 0.5 };
 }
 
 function PrintVals() {
@@ -181,7 +181,7 @@ function Dobas(d) {
     Move(0, d);
     if (sleep > 0) {
         sleep -= 1;
-        if (sleep == 0) { document.getElementById("bab1").style.filter = "opacity(1) sepia(0)"; }
+        if (sleep == 0) { document.getElementById("bab1").style.filter = "opacity(1) brightness(1)"; }
     }
     if (sleep == 0) { setTimeout(function () { d = parseInt(1 + 4 * Math.random()); Move(1, d) }, 2000); }
     setTimeout(function () { Track(0) }, 4000);
@@ -220,6 +220,7 @@ function UsePálesz() {
     }
     PrintVals();
     piaUp = 4;
+    updateVals();
 }
 
 function UseKocka() {
@@ -231,6 +232,7 @@ function UseKocka() {
     <img class='kocPic' onclick='Dobas(4)' src='./img/kocka-4.png' style='left: 260px'>`;
     document.getElementById("dice-btn").disabled = true;
     kocUp = 3;
+    updateVals();
 }
 
 function UseBomba() {
@@ -260,6 +262,7 @@ function UseBomba() {
     PrintVals();
     CheckDeath();
     bomUp = 2;
+    updateVals();
 }
 
 function UseAltato() {
@@ -267,8 +270,9 @@ function UseAltato() {
     x = parseInt(1 + Math.random() * Char[1].pos / 8);
     message("Battle Beetle-t " + x + " körre kivontad a forgalomból!");
     sleep = x + 1;
-    document.getElementById("bab1").style.filter = "opacity(0.5) sepia(1)";
+    document.getElementById("bab1").style.filter = "opacity(0.5) brightness(0.7)";
     altUp = 5;
+    updateVals();
 }
 
 function Move(pl, num) {
