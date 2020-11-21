@@ -152,3 +152,9 @@ button:focus {
     filter: opacity(1) blur(0px) brightness(1);
     transition: all 3s;
 }
+
+#zenegep {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
