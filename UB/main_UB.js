@@ -242,22 +242,22 @@ function EscapeBtn() {
 function NewRoom() {
     Steps += 1;
     if (Steps == 40) {
-        document.body.innerHTML = "<h1>MEGTALÁLTAD BATTLE BEETLE-T!<img src='./img/bbeetle.jpg' alt='Battle Beetle' style='display: block; margin-top: 20px; margin-left: auto; margin-right: auto; height: 600px;'><button onclick='Finale()'>Jöhet a végső harc!</button></h1>";
-        document.body.setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px); transition: filter 1.5s");
+        document.getElementById("container").innerHTML = "<h1>MEGTALÁLTAD BATTLE BEETLE-T!<img src='./img/bbeetle.jpg' alt='Battle Beetle' style='display: block; margin-top: 20px; margin-left: auto; margin-right: auto; height: 600px;'><button onclick='Finale()'>Jöhet a végső harc!</button></h1>";
+        document.getElementById("container").setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px); transition: filter 1.5s");
         localStorage.setItem("NewEro", Character[0]);
         localStorage.setItem("NewUgy", Character[1]);
         localStorage.setItem("NewEsz", Character[2]);
     } else if (Steps % 10 == 0) {
         XRoom = parseInt(Steps / 10) - 1;
         EnemyVal = 60 + XRoom * 20;
-        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Minden támadásod után ő is megpróbál varázserejével visszatámadni!</p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><p>Ellenfél támadóereje: <span id='enemy'></span></p><p class='Order'>Hogyan támadsz rá?</p><button id='EroAttack' onclick='EroBtn()'>Nyers erővel</button><button id='UgyAttack' onclick='UgyBtn()'>Taktikusan</button><button id='EszAttack' onclick='EszBtn()'>Furfanggal</button><button id='Flee' onclick='FleeBtn()'>Sehogy</button><div id='other'></div><br><div id='colossus'></div>";
+        document.getElementById("container").innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Minden támadásod után ő is megpróbál varázserejével visszatámadni!</p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><p>Ellenfél támadóereje: <span id='enemy'></span></p><p class='Order'>Hogyan támadsz rá?</p><button id='EroAttack' onclick='EroBtn()'>Nyers erővel</button><button id='UgyAttack' onclick='UgyBtn()'>Taktikusan</button><button id='EszAttack' onclick='EszBtn()'>Furfanggal</button><button id='Flee' onclick='FleeBtn()'>Sehogy</button><div id='other'></div><br><div id='colossus'></div>";
         document.getElementById("counter").innerHTML = Steps;
         document.getElementById("room-pic").src = XRooms[XRoom][0];
         document.getElementById("room-desc").innerHTML = XRooms[XRoom][1];
         document.getElementById("enemy").innerHTML = EnemyVal;
         PrintValues();
         CheckEnd();
-        document.body.setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px); transition: filter 1.5s");
+        document.getElementById("container").setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px); transition: filter 1.5s");
     } else {
         var YRoom = Room;
         Room = parseInt(Math.random() * Rooms.length);
@@ -265,14 +265,14 @@ function NewRoom() {
             Room += 1;
             if (Room == Rooms.length) { Room = 0 };
         };
-        document.body.innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><button id='ActBtn' onclick='ActionBtn()'>Akció</button><button id='EscBtn' onclick='EscapeBtn()'>Tovább</button><div id='other'></div><br><div id='colossus'></div>";
+        document.getElementById("container").innerHTML = "<div id='counter'></div><img id='room-pic' src='' alt='Új szoba'><p id = 'room-desc'></p><p>Erő: <span class='charvalue' id='ero'></span></p><p>Ügyesség: <span class='charvalue' id='ugyes'></span></p><p>Ész: <span class='charvalue' id='esz'></span></p><br><button id='ActBtn' onclick='ActionBtn()'>Akció</button><button id='EscBtn' onclick='EscapeBtn()'>Tovább</button><div id='other'></div><br><div id='colossus'></div>";
         document.getElementById("counter").innerHTML = Steps;
         document.getElementById("room-pic").src = Rooms[Room][0];
         document.getElementById("room-desc").innerHTML = Rooms[Room][1];
         if (Rooms[Room][2] == "trap") { document.getElementById("EscBtn").disabled = true; }
         PrintValues();
         CheckEnd();
-        document.body.setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px); transition: filter 1.5s");
+        document.getElementById("container").setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px); transition: filter 1.5s");
     };
 }
 
@@ -309,9 +309,9 @@ function PrintValues() {
 }
 
 function CheckEnd() {
-    if (Character[0] < 1) { document.body.innerHTML = "<h1>MEGHALTÁL!</h1><br><p class='Order'>Nyomd meg az F5-öt az időgép aktiválásához!</p>" };
-    if (Character[1] < 1 || Character[2] < 1) { document.body.innerHTML = "<h1>Annyira gyökér lettél, hogy nem érdemes tovább folytatni!</h1><br><p class='Order'>Nyomd meg az F5-öt az időgép aktiválásához!</p>" };
-    document.body.setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px);");
+    if (Character[0] < 1) { document.getElementById("container").innerHTML = "<h1>MEGHALTÁL!</h1><br><p class='Order'>Nyomd meg az F5-öt az időgép aktiválásához!</p>" };
+    if (Character[1] < 1 || Character[2] < 1) { document.getElementById("container").innerHTML = "<h1>Annyira gyökér lettél, hogy nem érdemes tovább folytatni!</h1><br><p class='Order'>Nyomd meg az F5-öt az időgép aktiválásához!</p>" };
+    document.getElementById("container").setAttribute("style", "filter: brightness(1); transition: filter 1s; filter: blur(0px);");
 }
 
 //Spéci szobák
@@ -466,7 +466,7 @@ function CheckBBDeath() {
 }
 
 function next() {
-    document.body.setAttribute("style", "filter: blur(20px) brightness(0)");
+    document.getElementById("container").setAttribute("style", "filter: blur(20px) brightness(0)");
     NewRoom();
 }
 

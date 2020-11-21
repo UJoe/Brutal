@@ -178,18 +178,16 @@ th {
     color: blue;
     background-color: lime;
     left: 9%;
-    transition: all 1.5s;
 }
 
 .BBVal {
     color: white;
     background-color: purple;
     left: 59%;
-    transition: all 1.5s;
 }
 
 span {
-    transition: all 1.5s;
+    will-change: contents;
 }
 
 #message {
