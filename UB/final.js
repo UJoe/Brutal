@@ -259,7 +259,7 @@ function UseBomba() {
         case 2:
             message("A bomba Battle Beetle fejénél robban. Veszít " + x + " Észt!");
             Char[1].esz -= x;
-            ChangeVal(1, esz, Char[1].esz);
+            ChangeVal(1, 3, Char[1].esz);
             break;
     }
     CheckDeath();
@@ -305,14 +305,14 @@ function CheckFight(pl1, pl2) {
                 if ((Char[pl1].esz > Char[pl2].esz + Char[pl2].arm + Math.random() * 10) || (pl1 == 0 && sleep > 0)) {
                     message("Kritikus támadás!")
                     Char[pl2].ero -= y * 2;
-                    Char[pl2].ugy -= parseInt(y / 5);
-                    Char[pl2].esz -= parseInt(y / 10);
-                    Char[pl2].arm -= 1;
-                    Char[pl2].seb -= 1;
                     ChangeVal(pl2, 1, Char[pl2].ero);
+                    Char[pl2].ugy -= Math.round(y / 5);
                     ChangeVal(pl2, 2, Char[pl2].ugy);
+                    Char[pl2].esz -= Math.round(y / 10);
                     ChangeVal(pl2, 3, Char[pl2].esz);
+                    Char[pl2].arm -= 1;
                     ChangeVal(pl2, 4, Char[pl2].arm);
+                    Char[pl2].seb -= 1;
                     ChangeVal(pl2, 5, Char[pl2].seb);
                     CheckDeath();
                 } else {
@@ -330,7 +330,6 @@ function CheckFight(pl1, pl2) {
 }
 
 function Track(pl) {
-
     switch (Board[Char[pl].pos][0]) {
         case "bogyo":
             var x = parseInt(5 + Math.random() * Char[pl].pos) * 2;
@@ -441,7 +440,7 @@ function Track(pl) {
                     break;
 
                 case 3:
-                    Char[pl].arm += parseInt(1 + 5 * Math.random());
+                    Char[pl].arm += parseInt(2 + 5 * Math.random());
                     ChangeVal(pl, 4, Char[pl].arm);
                     if (pl == 0) { message("Találsz egy deszkát, ami jó lesz védekezésre.") } else {
                         message("Battle Beetle befeszíti az izmait, amitől nő a páncélzata.");
@@ -449,7 +448,7 @@ function Track(pl) {
                     break;
 
                 case 4:
-                    Char[pl].arm -= parseInt(1 + 5 * Math.random());
+                    Char[pl].arm -= parseInt(2 + 5 * Math.random());
                     ChangeVal(pl, 4, Char[pl].arm);
                     if (pl == 0) { message("Rádömlik valami sav, ami tönkreteszi a felszerelésed.") } else {
                         message("Battle Beetle elernyeszti az izmait. Csökken a páncélzata.");
@@ -458,7 +457,7 @@ function Track(pl) {
                     break;
 
                 case 5:
-                    Char[pl].seb += parseInt(1 + 5 * Math.random());
+                    Char[pl].seb += parseInt(2 + 5 * Math.random());
                     ChangeVal(pl, 5, Char[pl].seb);
                     if (pl == 0) { message("Találsz egy Rambo-kést, ami jó lesz fegyvernek.") } else {
                         message("Battle Beetle edzi a csápjait. Nő a sebzése.");
@@ -466,7 +465,7 @@ function Track(pl) {
                     break;
 
                 case 6:
-                    Char[pl].seb -= parseInt(1 + 5 * Math.random());
+                    Char[pl].seb -= parseInt(2 + 5 * Math.random());
                     ChangeVal(pl, 5, Char[pl].seb);
                     if (pl == 0) { message("Megsérül a fegyvered (ha volt).") } else {
                         message("Battle Beetle lereszelte a körmeit. Csökken a sebzése.");
