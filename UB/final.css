@@ -130,6 +130,12 @@ h1 {text-align: center;
     border-radius: 50%;
     transition: all 0.5s;
     font-weight: bold;
+    animation: flash 2s infinite;
+}
+@keyframes flash {
+    0% {box-shadow: 0 0 10px rgba(50, 251, 14, 0);}
+    50% {box-shadow: 0 0 50px yellow;}
+    100% {box-shadow: 0 0 10px rgba(50, 251, 14, 0);}
 }
 
 #dice-btn:hover {
