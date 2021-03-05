@@ -132,11 +132,13 @@ h1 {text-align: center;
     font-weight: bold;
     animation: flash 2s infinite;
 }
+
 @keyframes flash {
     0% {box-shadow: 0 0 10px rgba(50, 251, 14, 0);}
-    50% {box-shadow: 0 0 50px yellow;}
+    50% {box-shadow: 0 0 35px rgb(50, 251, 14);}
     100% {box-shadow: 0 0 10px rgba(50, 251, 14, 0);}
-}
+  }
+  
 
 #dice-btn:hover {
     transform: scale(2.2);
