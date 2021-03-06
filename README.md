@@ -1,6 +1,6 @@
 # Brutal
 My first HTML-CSS-JS creation: an exciting role-play game in a brutal world. It has 3 parts: a dungeon-based development stage, an easy-to-use webshop to buy weapons, armor and special objects and the board-game-like final battle, where you can use these objects and your character's ability to defeat the final enemy. 100% my code, not even a single line was borrowed from StackOverflow or elsewhere, because I wanted to practise what I's just learned at my fisrt IT course at NIVE in a funny way. It also demonstrates my development from an absolute beginner to a bit better programmer - but you can play the game well at any stage, and your character has a continuous development. Have fun! Unfortunately, the game is in Hungarian, but believe me: it's very funny, so it's absolutely normal if you laugh your head off even if you don't understand a word! :)
 
-I have a very wide monitor at home and I didn't know a lot about responsive design at the time when I coded it, so if you don't have such a monitor, sorry. Alternatively, you can come around and play with it in my home. :)
+I have a very wide monitor at home and I didn't know a lot about responsive design at the time when I coded it, so if you don't have such a monitor, sorry. Alternatively, you can come around and play with it in my home. I assure you that it is displayed perfectly on my monitor. ;)
 
 I would code lots of things differently now, but it was fun how I tried using the basic commands I'd just learned immediately to create a game.
