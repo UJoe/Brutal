@@ -1,0 +1,462 @@
+<<<<<<< HEAD:UB/final.css
+@font-face {
+    font-family: Oldenburg;
+    src: url(./fonts/Oldenburg-Regular.ttf);
+}
+
+body {
+    font-family: Oldenburg;
+    background-image: url("./img/dark_final.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: yellow;
+}
+
+p {
+    margin-left: 30px;
+}
+
+h1 {
+    text-align: center;
+    color: red;
+    filter: drop-shadow(0px 16px 20px yellow);
+    font-size: 200%;
+}
+
+#magno {
+    position: fixed;
+    top: 80px;
+    right: 45px;
+    transform: scale(0.8);
+}
+
+#board {
+    margin-top: 50px;
+}
+
+.mezo {
+    position: fixed;
+    height: 140px;
+    width: 140px;
+    border: double lightgreen;
+    border-radius: 20px;
+}
+
+#bab0,
+#bab1 {
+    position: absolute;
+    height: 65px;
+    width: 65px;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.ObjPic {
+    position: relative;
+    display: inline-block;
+    top: 480px;
+    height: 70px;
+    width: 70px;
+    margin: 5px 5px 5px 50px;
+    border-radius: 25px;
+    opacity: 0.6;
+}
+
+.ObjPic:hover {
+    border: solid 5px red;
+    margin: 0px 0px 0px 45px;
+}
+
+.ObjPic:active {
+    transform: scale(1.2);
+}
+
+.kocPic {
+    position: fixed;
+    display: inline-block;
+    bottom: 70px;
+    height: 50px;
+    width: 50px;
+    margin: 50px 5px 5px 50px;
+    border-radius: 15px;
+}
+
+.kocPic:hover {
+    border: solid 5px red;
+    margin: 0px 0px 0px 45px;
+}
+
+.kocPic:active {
+    transform: scale(1.2);
+    outline: none;
+}
+
+.kocPic:focus {
+    outline: none;
+}
+
+
+.UpNo {
+    position: relative;
+    display: inline-block;
+    top: 490px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), cyan, rgba(0, 0, 0, 0));
+    color: darkblue;
+    margin: 0px 5px 0px 50px;
+    border-radius: 50%;
+    font-size: large;
+    font-weight: bold;
+    width: 70px;
+    text-align: center;
+}
+
+#values {
+    position: absolute;
+    left: 33%;
+    top: 71%;
+}
+
+#other {
+    position: absolute;
+    bottom: 100px;
+    left: 100px;
+}
+
+#dice-btn {
+    position: absolute;
+    bottom: 50px;
+    left: 100px;
+    transform: scale(2);
+    color: red;
+    background-color: darkblue;
+    border: solid 2px limegreen;
+    border-radius: 50%;
+    transition: all 0.5s;
+    font-weight: bold;
+    animation: flash 2s infinite;
+}
+
+@keyframes flash {
+    0% {
+        box-shadow: 0 0 10px rgba(50, 251, 14, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 35px rgb(50, 251, 14);
+    }
+
+    100% {
+        box-shadow: 0 0 10px rgba(50, 251, 14, 0);
+    }
+}
+
+
+#dice-btn:hover {
+    transform: scale(2.2);
+    transition: all 0.3s;
+}
+
+#dice-btn:active {
+    filter: invert(1);
+}
+
+#dice-btn:disabled {
+    transform: scale(0.1);
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+td,
+th {
+    width: 585px;
+    padding: 5px;
+    font-size: large;
+}
+
+th {
+    padding: 5px 15px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(120, 0, 255, 0.5), #0440FC, rgba(120, 0, 255, 0.5), rgba(0, 0, 0, 0));
+    color: lightyellow;
+    border-radius: 50%;
+}
+
+.CharVal,
+.BBVal {
+    display: inline-block;
+    width: 0px;
+    text-align: left;
+    position: absolute;
+    transition: all 1.2s ease-out;
+}
+
+.CharVal {
+    color: blue;
+    background-color: lime;
+    left: 9%;
+}
+
+.BBVal {
+    color: white;
+    background-color: purple;
+    left: 59%;
+}
+
+span {
+    will-change: contents;
+}
+
+#message {
+    position: absolute;
+    left: 15%;
+    top: 390px;
+    opacity: 1;
+    background-image: radial-gradient(circle, rgba(192, 242, 227, 0.5), rgba(255, 255, 0, 0));
+    color: cyan;
+    padding: 2px;
+    font-size: 200%;
+    font-weight: bold;
+}
+
+.btn {
+    font-size: 1rem;
+    transform: scale(1.3);
+    margin: 70px;
+    padding: 5px;
+    color: orangered;
+    background-color: darkblue;
+    border: solid 1px turquoise;
+    border-radius: 10px;
+    opacity: 1;
+    transition: all 0.5s;
+    width: fit-content;
+    max-width: 240px;
+    outline: none;
+}
+
+a {
+    font-size: 1rem;
+    transform: scale(1.3);
+    color: orangered;
+    background-color: darkblue;
+    text-decoration: none;
+}
+
+.btn:hover {
+    font-size: 1rem;
+    transform: scale(1.4);
+    border: outset 5px turquoise;
+    color: red;
+    transition: all 0.3s;
+}
+
+.btn:active {
+    border: inset 4px lightseagreen;
+    color: orangered;
+    outline: none;
+}
+=======
+@font-face {
+    font-family: Oldenburg;
+    src: url(./fonts/Oldenburg-Regular.ttf);
+}
+
+body {
+    font-family: Oldenburg;
+    background-image: url("./img/dark_final.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: yellow;
+}
+
+p {
+    margin-left: 30px;
+}
+
+h1 {text-align: center;
+    color: red;
+    filter: drop-shadow(0px 16px 20px yellow);
+    font-size: 200%;
+}
+
+#magno {
+    position: fixed;
+    top: 80px;
+    right: 45px;
+    transform: scale(0.8);
+}
+
+#board {
+    margin-top: 50px;
+}
+
+.mezo {
+    position: fixed;
+    height: 140px;
+    width: 140px;
+    border: double lightgreen;
+    border-radius: 20px;
+}
+
+#bab0, #bab1 {
+    position: absolute;
+    height: 65px;
+    width: 65px;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.ObjPic {
+    position: relative;
+    display: inline-block;
+    top: 480px;
+    height: 70px;
+    width: 70px;
+    margin: 5px 5px 5px 50px;
+    border-radius: 25px;
+    opacity: 0.6;
+}
+
+.ObjPic:hover {
+    border: solid 5px red;
+    margin: 0px 0px 0px 45px;
+}
+
+.ObjPic:active {
+    transform: scale(1.2);
+}
+
+.kocPic {
+    position: fixed;
+    display: inline-block;
+    bottom: 70px;
+    height: 50px;
+    width: 50px;
+    margin: 50px 5px 5px 50px;
+    border-radius: 15px;
+}
+
+.kocPic:hover {
+    border: solid 5px red;
+    margin: 0px 0px 0px 45px;
+}
+
+.kocPic:active {
+    transform: scale(1.2);
+    outline: none;
+}
+
+.kocPic:focus {
+    outline: none;
+}
+
+
+.UpNo {
+    position: relative;
+    display: inline-block;
+    top: 490px;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), cyan, rgba(0,0,0,0));
+    color:darkblue;
+    margin: 0px 5px 0px 50px;
+    border-radius: 50%;
+    font-size: large;
+    font-weight: bold;
+    width: 70px;
+    text-align: center;
+}
+
+#values {
+    position: absolute;
+    left: 33%;
+    top: 71%;
+}
+
+#other {
+    position: absolute;
+    bottom: 100px;
+    left: 100px;
+}
+
+#dice-btn {
+    position: absolute;
+    bottom: 50px;
+    left: 100px;
+    transform: scale(2);
+    color: red;
+    background-color: darkblue;
+    border: solid 2px limegreen;
+    border-radius: 50%;
+    transition: all 0.5s;
+    font-weight: bold;
+    animation: flash 2s infinite;
+}
+@keyframes flash {
+    0% {box-shadow: 0 0 10px rgba(50, 251, 14, 0);}
+    50% {box-shadow: 0 0 50px yellow;}
+    100% {box-shadow: 0 0 10px rgba(50, 251, 14, 0);}
+}
+
+#dice-btn:hover {
+    transform: scale(2.2);
+    transition: all 0.3s;
+}
+
+#dice-btn:active {
+    filter: invert(1);
+}
+
+#dice-btn:disabled {
+    transform: scale(0.1);
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+td, th {
+    width: 585px;
+    padding: 5px;
+    font-size: large;
+}
+
+th {
+    padding: 5px 15px;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(120,0,255,0.5), #0440FC,  rgba(120,0,255,0.5), rgba(0,0,0,0));
+    color: lightyellow;
+    border-radius: 50%;
+}
+
+.CharVal, .BBVal {
+   display: inline-block;
+   width: 0px;
+   text-align: left;
+   position: absolute;
+   transition: all 1.2s ease-out;
+}
+
+.CharVal {
+    color: blue;
+    background-color: lime;
+    left: 9%;
+}
+
+.BBVal {
+    color: white;
+    background-color: purple;
+    left: 59%;
+}
+
+span {
+    will-change: contents;
+}
+
+#message {
+    position: absolute;
+    left: 15%;
+    top: 390px;
+    opacity: 1;
+    background-image: radial-gradient(circle, rgba(192, 242, 227, 0.5), rgba(255, 255, 0, 0));
+    color:cyan;
+    padding: 2px;
+    font-size: 200%;
+    font-weight: bold;
+}
+
+>>>>>>> 18ccecbac56d8e4d19f111f4fcd1a9609b0fcaa7:final.css

@@ -1,0 +1,94 @@
+@font-face {
+    font-family: Oldenburg;
+    src: url(./fonts/Oldenburg-Regular.ttf);
+}
+
+body {
+    font-family: Oldenburg;
+    background-image: radial-gradient(circle,white, lightblue, cyan, yellow);
+    color: darkblue;
+    font-size: 105%;
+    outline: none;
+}
+
+#magno {
+    position: absolute;
+    bottom: 1.2cm;
+    right: 21.5cm;
+}
+
+#cart {
+    position: absolute;
+    bottom: 1.6cm;
+    right: 2.2cm;
+    transform: scale(2.3);
+    background-image: linear-gradient(to right, red, yellow);
+    color: blue;
+    border-radius: 15px;
+}
+
+#cart:hover {
+    border: outset;
+    background-image: linear-gradient(to right, yellow, red);
+}
+
+#cart:active {
+    border: inset;
+}
+
+span {
+    color: red;
+    background-image: radial-gradient(yellow, white);
+    border-radius: 10px;
+
+}
+
+h1 {text-align: center;
+    color: red;
+    filter: drop-shadow(0px 16px 20px yellow);
+    font-size: 200%;
+}
+
+h3 {
+    color: red;
+}
+
+#shop {
+    background-image: url("./img/shop.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right;
+}
+
+.ruha {
+    height: 100px;
+    width: 100px;
+    margin: 10px;
+    border: 1px solid brown;
+    border-radius: 20px;
+}
+
+.ruha:hover {
+    border: 5px solid red;
+    filter: brightness(1.2);
+    margin: 6px;
+}
+
+.price {
+    text-align: center;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), cornsilk, rgba(0,0,0,0));
+    color: darkblue;
+}
+
+#message {
+    position: absolute;
+    left: 35.7cm;
+    top: 11.7cm;
+    opacity: 1;
+    background: lightcyan;
+    color: darkblue;
+    padding: 2px;
+    border: dotted 1px darkblue;
+    border-radius: 10px;
+    font-size: 115%;
+}
