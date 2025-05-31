@@ -222,43 +222,33 @@ function printVals() {
     <th>BATTLE BEETLE</th>
     </tr>
     <tr>
-    <td>Erő: <span class='CharVal' id='val_0_1' style="width: ${
-      15 + Char[0].ero * 1.5
+    <td>Erő: <span class='CharVal' id='val_0_1' style="width: ${15 + Char[0].ero * 1.5
     }px;">${Char[0].ero}</span></td>
-    <td>Erő: <span class='BBVal' id='val_1_1' style="width: ${
-      15 + Char[1].ero * 1.5
+    <td>Erő: <span class='BBVal' id='val_1_1' style="width: ${15 + Char[1].ero * 1.5
     }px;">${Char[1].ero}</span></td>
     </tr>
     <tr>
-    <td>Ügyesség: <span class='CharVal' id='val_0_2' style="width: ${
-      15 + Char[0].ugy * 1.5
+    <td>Ügyesség: <span class='CharVal' id='val_0_2' style="width: ${15 + Char[0].ugy * 1.5
     }px;">${Char[0].ugy}</span></td>
-    <td>Ügyesség: <span class='BBVal' id='val_1_2' style="width: ${
-      15 + Char[1].ugy * 1.5
+    <td>Ügyesség: <span class='BBVal' id='val_1_2' style="width: ${15 + Char[1].ugy * 1.5
     }px;">${Char[1].ugy}</span></td>
     </tr>
     <tr>
-    <td>Ész: <span class='CharVal' id='val_0_3' style="width: ${
-      15 + Char[0].esz * 1.5
+    <td>Ész: <span class='CharVal' id='val_0_3' style="width: ${15 + Char[0].esz * 1.5
     }px;">${Char[0].esz}</span></td>
-    <td>Ész: <span class='BBVal' id='val_1_3' style="width: ${
-      15 + Char[1].esz * 1.5
+    <td>Ész: <span class='BBVal' id='val_1_3' style="width: ${15 + Char[1].esz * 1.5
     }px;">${Char[1].esz}</span></td>
     </tr>
     <tr>
-    <td>Páncél: <span class='CharVal' id='val_0_4' style="width: ${
-      15 + Char[0].arm * 1.5
+    <td>Páncél: <span class='CharVal' id='val_0_4' style="width: ${15 + Char[0].arm * 1.5
     }px;">${Char[0].arm}</span></td>
-    <td>Páncél: <span class='BBVal' id='val_1_4' style="width: ${
-      15 + Char[1].arm * 1.5
+    <td>Páncél: <span class='BBVal' id='val_1_4' style="width: ${15 + Char[1].arm * 1.5
     }px;">${Char[1].arm}</span></td>
     </tr>
     <tr>
-    <td>Sebzés: <span class='CharVal' id='val_0_5' style="width: ${
-      15 + Char[0].seb * 1.5
+    <td>Sebzés: <span class='CharVal' id='val_0_5' style="width: ${15 + Char[0].seb * 1.5
     }px;">${Char[0].seb}</span></td>
-    <td>Sebzés: <span class='BBVal' id='val_1_5' style="width: ${
-      15 + Char[1].seb * 1.5
+    <td>Sebzés: <span class='BBVal' id='val_1_5' style="width: ${15 + Char[1].seb * 1.5
     }px;">${Char[1].seb}</span></td>
     </tr>
     </table>`;
@@ -394,8 +384,8 @@ function useBomba() {
     case 1:
       message(
         "A bomba Battle Beetle egyik lábát találja el. Veszít " +
-          x +
-          " Ügyességet!"
+        x +
+        " Ügyességet!"
       );
       Char[1].ugy -= x;
       changeVal(1, 2, Char[1].ugy);
@@ -729,7 +719,9 @@ function track(pl) {
             <li>Panninak, Boginak és Marcinak, hogy folyamatosan elkísértek utadon és rámutattak bizonyos hibákra,</li>
             <li>a ZapSplat-nek a fülbemászó zenéket és</li>
             <li>Utri Gergelynek az egész világ megalkotását és kódolását.</li>
-            </ul>`;
+            </ul>
+            <br>
+            <button class="btn"><a href="https://ujoe.github.io/Brutal2/">Jöjjön a 2. rész!</a></button>`;
           document.body.style =
             "filter: opacity(1) brightness(1) blur(0); transition: all 1s";
         }, 5001);
@@ -795,7 +787,9 @@ function checkDeath() {
             <li>Panninak, Boginak és Marcinak, hogy folyamatosan elkísértek utadon és rámutattak bizonyos hibákra,</li>
             <li>a ZapSplat-nek a fülbemászó zenéket és</li>
             <li>Utri Gergelynek az egész világ megalkotását és kódolását.</li>
-            </ul>`;
+            </ul>
+            <br>
+            <button class="btn"><a href="https://ujoe.github.io/Brutal2/">Jöjjön a 2. rész!</a></button>`;
       document.body.style =
         "filter: opacity(1) brightness(1) blur(0); transition: all 1s";
     }, 5001);
